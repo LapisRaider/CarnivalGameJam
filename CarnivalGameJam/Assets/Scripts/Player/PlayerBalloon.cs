@@ -7,7 +7,7 @@ public class PlayerBalloon : MonoBehaviour
     //TODO:: should have a ref to the balloon
     [Header("Balloon Object")]
     public Animator m_BalloonAnimator;
-    public SpriteRenderer m_BalloonSprite;
+    public Material m_BalloonMaterial;
     public Color m_DefaultBalloonColor; //default balloon color
 
     private ColorVariants m_CurrentColor = ColorVariants.COLORLESS;
@@ -50,13 +50,13 @@ public class PlayerBalloon : MonoBehaviour
     {
         //TODO::  replay the balloon BLOWING animation
         //RESET THE BALLOON MATERIAL AND STUFF
-        if (m_BalloonSprite == null)
+        if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");
             return;
         }
 
-        m_BalloonSprite.color = m_DefaultBalloonColor;
+        m_BalloonMaterial.color = m_DefaultBalloonColor;
 
         m_CurrentColor = ColorVariants.COLORLESS;
 
@@ -80,13 +80,13 @@ public class PlayerBalloon : MonoBehaviour
 
         //TODO:: change balloon color and do all the special effects
 
-        if (m_BalloonSprite == null)
+        if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");
             return;
         }
-            
-        m_BalloonSprite.color = ColorData.Instance.GetColor(m_CurrentColor);
+
+        m_BalloonMaterial.color = ColorData.Instance.GetColor(m_CurrentColor);
     }
 
     public void AddBlue()

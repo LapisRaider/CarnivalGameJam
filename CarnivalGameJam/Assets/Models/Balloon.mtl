@@ -1,0 +1,6 @@
+newmtl model:mat4
+illum 4
+Kd 0.00 0.52 0.66
+Ka 0.00 0.74 0.83
+Tf 1.00 1.00 1.00
+Ni 1.00

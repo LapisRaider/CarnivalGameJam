@@ -43,8 +43,6 @@ public class PlayerBalloon : MonoBehaviour
                 }
             }
         }
-
-        //HOW DO I ART THIS MYSELF
     }
 
     //reset the balloon and material

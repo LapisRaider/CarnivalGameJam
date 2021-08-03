@@ -10,6 +10,9 @@ public class PlayerBalloon : MonoBehaviour
     public Material m_BalloonMaterial;
     public Color m_DefaultBalloonColor; //default balloon color
 
+    //[Header("Spray Effect")]
+    //particle effects for spraying at the balloon
+
     private ColorVariants m_CurrentColor = ColorVariants.COLORLESS;
     private ColorMixes m_CurrentMix;
 
@@ -48,8 +51,10 @@ public class PlayerBalloon : MonoBehaviour
     //reset the balloon and material
     private void ResetBalloon()
     {
-        //TODO::  replay the balloon BLOWING animation
-        
+        //replay the balloon BLOWING animation
+        if (m_BalloonAnimator != null)
+            m_BalloonAnimator.SetTrigger("BlowBalloon");
+
         if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");

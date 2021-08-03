@@ -9,9 +9,7 @@ public class NPC : MonoBehaviour
     public GameObject m_SpeechBubble;
     public TextMeshProUGUI m_ColorText;
 
-
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
-
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +56,7 @@ public class NPC : MonoBehaviour
         }
         else
         {
-            //NPC not happy, cry bitch
+            //NPC not happy, cry BITCH
             //play some sad effects
             //decrease happiness level or counter or whatever
         }

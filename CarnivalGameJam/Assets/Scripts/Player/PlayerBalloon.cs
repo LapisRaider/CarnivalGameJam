@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBalloon : MonoBehaviour
 {
-    //TODO:: should have a ref to the balloon
+    //have a ref to the balloon
     [Header("Balloon Object")]
     public Animator m_BalloonAnimator;
     public Material m_BalloonMaterial;
@@ -22,8 +22,7 @@ public class PlayerBalloon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO:: check whether i clicked on an NPC
-        //if yes, give Balloon and reset balloon
+        //check whether i clicked on an NPC
         if (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -32,12 +31,14 @@ public class PlayerBalloon : MonoBehaviour
             // Casts the ray and get the first game object hit
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.name == "NPC")
+                if (hit.transform.CompareTag("NPCs"))
                 {
-                    //check if got the component
-                    //get the NPC component
+                    //check if got the NPC component
+                    NPC npc = hit.transform.GetComponent<NPC>();
+                    if (npc == null)
+                        return;
 
-                    //give balloon
+                    npc.TakeBalloon(m_CurrentColor); //give balloon to child
                     ResetBalloon();
                 }
             }
@@ -46,10 +47,11 @@ public class PlayerBalloon : MonoBehaviour
         //HOW DO I ART THIS MYSELF
     }
 
+    //reset the balloon and material
     private void ResetBalloon()
     {
         //TODO::  replay the balloon BLOWING animation
-        //RESET THE BALLOON MATERIAL AND STUFF
+        
         if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");

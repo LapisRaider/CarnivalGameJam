@@ -43,6 +43,7 @@ public class ColorData : SingletonBase<ColorData>
         return ColorVariants.COLORLESS;
     }
 
+    // get color name in string form
     public string GetColorName(ColorVariants colorType)
     {
         if (!m_AvilableColorList.ContainsKey(colorType))
@@ -51,6 +52,7 @@ public class ColorData : SingletonBase<ColorData>
         return m_AvilableColorList[colorType].m_ColorName;
     }
 
+    //get color, used more for UI
     public Color GetColor(ColorVariants colorType)
     {
         if (!m_AvilableColorList.ContainsKey(colorType))

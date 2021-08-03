@@ -10,7 +10,7 @@ public class NPCObjectPooler
     List<NPC> m_NPCList = new List<NPC>();
 
     // Start is called before the first frame update
-    void SpawnNPC()
+    public void SpawnNPC()
     {
         for (int i = 0; i < m_InitialSpawnAmt; ++i)
         {
@@ -19,6 +19,7 @@ public class NPCObjectPooler
 
             GameObject npcObj = GameObject.Instantiate(m_NPCPrefab, new Vector3(0.0f, 0, 0), Quaternion.identity);
             NPC npc = npcObj.GetComponent<NPC>();
+            npcObj.SetActive(false);
 
             m_NPCList.Add(npc);
         }

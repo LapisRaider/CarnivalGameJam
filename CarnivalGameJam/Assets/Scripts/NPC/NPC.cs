@@ -57,6 +57,7 @@ public class NPC : MonoBehaviour
         m_ColorWanted = (ColorVariants)Random.Range((int)(ColorVariants.RED), (int)(ColorVariants.COLORLESS));
 
         Debug.Log("Color wanted " + m_ColorWanted);
+        //TODO:: should decide based on the difficulty
         //must first check which mode to go for
         //need see whether to go for the different color
         // or the normal version for text, if this version show the text, text make black
@@ -71,22 +72,43 @@ public class NPC : MonoBehaviour
 
     public void TakeBalloon(ColorVariants colorGiven)
     {
-        //give balloon to child
-        //walk away
-
         if (colorGiven == m_ColorWanted)
         {
-            //the NPC walks away happy
-            //play some happy effects
-            //add to happiness levels i guess
-            Debug.Log("Correct");
+            Debug.Log(m_ColorWanted);
+            Happy();
         }
         else
         {
             Debug.Log("WRONG");
-            //NPC not happy, cry BITCH
-            //play some sad effects
-            //decrease happiness level or counter or whatever
+            Sad();
         }
+
+        //TODO:: show the balloon rising up
+    }
+
+    //walk sadly away
+    public void Sad()
+    {
+        //NPC not happy, cry BITCH
+        //play some sad effects
+        //decrease happiness level or counter or whatever
+
+        Leave();
+    }
+
+    //walk happ
+    public void Happy()
+    {
+        //the NPC walks away happy
+        //play some happy effects
+        //add to happiness levels i guess
+
+        Leave();
+    }
+
+    //leave the qeueing position
+    public void Leave()
+    {
+
     }
 }

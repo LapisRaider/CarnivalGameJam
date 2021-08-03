@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     public TextMeshProUGUI m_ColorText;
 
     [Header("Npc Behavior")]
+    public Animator m_Animator;
     private float m_PatienceTime = 0.0f; //in seconds
 
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
@@ -92,6 +93,7 @@ public class NPC : MonoBehaviour
         //NPC not happy, cry BITCH
         //play some sad effects
         //decrease happiness level or counter or whatever
+        //make sure to rotate towards the direction
 
         Leave();
     }

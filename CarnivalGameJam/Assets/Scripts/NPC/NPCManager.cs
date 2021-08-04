@@ -18,10 +18,7 @@ public class NPCManager : MonoBehaviour
     public float m_MinCustomersQueuing = 1; //if less than this number spawn in immediately
     public NPCManagerData m_NPCManagerData;
 
-    public float m_CurrSpawnInterval = 10.0f;
-    private float m_CurrSpawnRate = 0.5f;
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
-
     private float m_CurrCustomerQueuing = 0;
     private NPC[] m_CustomersInQueue; //for customers actually ordering
 
@@ -35,6 +32,7 @@ public class NPCManager : MonoBehaviour
         }
 
         m_NPCObjPooler.AddNPCInPooler();
+        m_NPCManagerData.Init();
     }
 
     // Update is called once per frame
@@ -49,7 +47,7 @@ public class NPCManager : MonoBehaviour
         if (m_WaitingNPCs.Count < m_SpawnPos.Length)
         {
             float randomRate = Random.Range(0.0f, 1.0f);
-            if (randomRate <= m_CurrSpawnRate)
+            if (randomRate <= m_NPCManagerData.m_CurrSpawnRate)
             {
                 m_WaitingNPCs.Enqueue(SpawnInNPC());
             }
@@ -83,13 +81,8 @@ public class NPCManager : MonoBehaviour
             Vector3 leavePos = m_LeavePos[Random.Range(0, m_LeavePos.Length)].position;
             Vector3 queuePos = m_QueuePositions[i].position;
 
-            //TODO:: the speed, patience time and rotation time 
-            //should be determined based on the current difficulty modifier
-            float patienceTime = 1.0f;
-            float walkSpeed = 1.0f;
-            float rotationSpeed = 1.0f;
-
-            npc.InitNPCToQueue(patienceTime, walkSpeed, rotationSpeed, queuePos, leavePos);
+            npc.InitNPCToQueue(m_NPCManagerData.m_CurrNPCPatienceTime, m_NPCManagerData.m_CurrNPCMoveSpeed,
+                                m_NPCManagerData.m_CurrNPCRotationSpeed, queuePos, leavePos);
             npc.OnLeftQueueCallback += NPCLeftQueuePos; //set the callback
 
             m_CustomersInQueue[i] = npc;
@@ -144,27 +137,76 @@ public class NPCManager : MonoBehaviour
             break;
         }
     }
+
+    //TODO:: REMEMBER TO ADD THIS TO THE DELEGATE
+    private void UpdateNPCDataModifiers(float currModifier)
+    {
+        //spawn rate
+        m_NPCManagerData.UpdateBasedOnModifier(currModifier);
+    }
 }
 
 [System.Serializable]
 public class NPCManagerData
 {
     [Header("Customer spawning Rates")]
-    public float m_MaxSpawnRate = 0.75f;
-    public float m_MinSpawnRate = 0.5f;
+    public float m_MaxSpawnRate = 0.75f; //spawn rate should increase
+    public float m_DefaultSpawnRate = 0.5f;
 
-    public float m_MinSpawnInterval = 5.0f;
-    public float m_MaxSpawnInterval = 10.0f;
+    public float m_MinSpawnInterval = 5.0f; //spawn interval should be decreasing as the time goes
+    public float m_DefaultSpawnInterval = 10.0f;
 
     [Header("NPC data")]
     //will increase as time goes
     public float m_NPCMaxSpeed = 1.0f;
-    public float m_NPCMinSpeed = 1.0f;
+    public float m_NPCDefaultSpeed = 1.0f;
 
+    //will increase as time goes
     public float m_NPCMaxRotationSpeed = 1.0f;
-    public float m_NPCMinRotationSpeed = 1.0f;
+    public float m_NPCDefaultRotationSpeed = 1.0f;
 
     //will decrease as time goes
-    public float m_NPCMaxPatienceTime = 2.0f;
+    public float m_NPCDefaultPatienceTime = 2.0f;
     public float m_NPCMinPatienceTime = 2.0f;
+
+    [Header("Current NPC Manager Data")]
+    [HideInInspector] public float m_CurrSpawnRate = 0.5f;
+    [HideInInspector] public float m_CurrSpawnInterval = 10.0f;
+    [HideInInspector] public float m_CurrNPCMoveSpeed = 1.0f;
+    [HideInInspector] public float m_CurrNPCRotationSpeed = 1.0f;
+    [HideInInspector] public float m_CurrNPCPatienceTime = 1.0f;
+
+    public void Init()
+    {
+        m_CurrSpawnRate = m_DefaultSpawnRate;
+        m_CurrSpawnInterval = m_DefaultSpawnInterval;
+
+        m_CurrNPCMoveSpeed = m_NPCDefaultSpeed;
+        m_CurrNPCRotationSpeed = m_NPCDefaultRotationSpeed;
+        m_CurrNPCPatienceTime = m_NPCDefaultPatienceTime;
+    }
+
+    public void UpdateBasedOnModifier(float currModifier)
+    {
+        //TODO:: FIX THE 1.0F
+
+        float modifierCalculator = m_DefaultSpawnRate * currModifier;
+        m_CurrSpawnRate = Mathf.Clamp(modifierCalculator, m_DefaultSpawnRate, m_MaxSpawnRate);
+
+        //spawn interval
+        modifierCalculator = m_DefaultSpawnInterval * (1.0f - currModifier);
+        m_CurrSpawnInterval = Mathf.Clamp(modifierCalculator, m_MinSpawnInterval, m_DefaultSpawnInterval);
+
+        //NPC move speed
+        modifierCalculator = m_NPCDefaultSpeed * currModifier;
+        m_CurrNPCMoveSpeed = Mathf.Clamp(modifierCalculator, m_NPCDefaultSpeed, m_NPCMaxSpeed);
+
+        //npc rotation speed
+        modifierCalculator = m_NPCDefaultRotationSpeed * currModifier;
+        m_CurrNPCRotationSpeed = Mathf.Clamp(modifierCalculator, m_NPCDefaultRotationSpeed, m_NPCMaxRotationSpeed);
+
+        //npc patience time
+        modifierCalculator = m_NPCDefaultPatienceTime * (1.0f - currModifier);
+        m_CurrNPCPatienceTime = Mathf.Clamp(modifierCalculator, m_NPCMinPatienceTime, m_NPCDefaultPatienceTime);
+    }
 }

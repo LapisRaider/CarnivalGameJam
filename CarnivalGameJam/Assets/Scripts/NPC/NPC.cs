@@ -26,7 +26,6 @@ public class NPC : MonoBehaviour
     [Header("Npc Movement")]
     public float m_StopThreshold = 1.0f; //threshold to stop
     public float m_RotationStopThreshold = 0.98f;
-    public Rigidbody m_Rididbody;
 
     // set by npcManager
     private float m_WalkSpeed = 1.0f;
@@ -68,23 +67,23 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (test)
+        {
+            //AskForBalloon();
+            StartCoroutine(StartQueue());
+
+            test = false;
+        }
+
+
         if (!m_IsWaiting)
             return;
 
         m_PatienceTime -= Time.deltaTime; //reduce the patienceTime
         //TODO:: UPDATE SOME UI TO SHOW THE TIME LEFT
         if (m_PatienceTime <= 0.0f)
-        {      
-            Sad(); //Leave and sad
-        }
-        
-
-        if (test)
         {
-            AskForBalloon();
-            //StartCoroutine(StartQueue());
-
-            test = false;
+            Sad(); //Leave and sad
         }
     }
 
@@ -131,7 +130,7 @@ public class NPC : MonoBehaviour
         Quaternion nextRotation = Quaternion.LookRotation(dir, Vector3.up);
         transform.rotation = Quaternion.Lerp(m_OriginalTransform.rotation, nextRotation, Time.time * m_RotationSpeed);
 
-        return Quaternion.Dot(transform.rotation, nextRotation) >= m_RotationStopThreshold;
+        return Mathf.Abs(Quaternion.Dot(transform.rotation, nextRotation)) >= m_RotationStopThreshold;
     }
 
     IEnumerator StartQueue()

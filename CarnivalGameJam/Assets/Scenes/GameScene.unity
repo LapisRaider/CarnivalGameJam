@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222094031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.65, y: -0.08690739, z: 3.5795102}
+  m_LocalPosition: {x: 2.17, y: 0.31, z: 3.5795102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861041220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4e791e5bf713a54197ef0848711719a, type: 3}
   m_Name: 
@@ -1758,6 +1758,9 @@ MonoBehaviour:
     m_InitialSpawnAmt: 3
   m_MaxSpawnRate: 0.75
   m_MinSpawnRate: 0.5
+  m_MinSpawnInterval: 5
+  m_MaxSpawnInterval: 10
+  m_CurrSpawnInterval: 10
   m_MinCustomersQueuing: 1
   m_NPCMaxSpeed: 1
   m_NPCMinSpeed: 1
@@ -1789,7 +1792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883017830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.4, y: -0.08690739, z: 3.5795102}
+  m_LocalPosition: {x: -2.11, y: -0.08690739, z: 2.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2271,6 +2274,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060074240814750367, guid: d56c6a8cb38bf684594f34fecb9e4371,
+        type: 3}
+      propertyPath: m_NextPos.x
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060074240814750367, guid: d56c6a8cb38bf684594f34fecb9e4371,
+        type: 3}
+      propertyPath: m_NextPos.z
+      value: -3.73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56c6a8cb38bf684594f34fecb9e4371, type: 3}

@@ -22,6 +22,9 @@ public class NPCManager : MonoBehaviour
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
 
     //SPAWN INTERVAL
+    public float m_MinSpawnInterval = 5.0f;
+    public float m_MaxSpawnInterval = 10.0f;
+    public float m_CurrSpawnInterval = 10.0f;
 
 
 
@@ -62,13 +65,13 @@ public class NPCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //when there is an avilable spot in the queue, grab NPC and put it there
         //there should some NPCs at the back just chilling
 
         //CHECK THE CURRENT GAME STATE AND GET A MULTIPLIER FROM IT
         //m_CurrSpawnRate UPDATE THIS
 
 
+        //MAKE SURE TO ADD SOME SORT OF TIMER HERE TODO::
         if (m_WaitingNPCs.Count < m_SpawnPos.Length)
         {
             float randomRate = Random.Range(0.0f, 1.0f);
@@ -78,38 +81,47 @@ public class NPCManager : MonoBehaviour
             }
         }
 
+        if (m_CurrCustomerQueuing < m_CustomersInQueue.Length)
+        {
+            if (m_WaitingNPCs.Count != 0)
+            {
+                NPC npc = m_WaitingNPCs.Dequeue(); //grab from the queue
+                GetNPCToQueue(npc);
+            }
+        }
+
         //if not enough customers ordering the balloon, spawn some immediately
         if (m_CurrCustomerQueuing < m_MinCustomersQueuing)
         {
-            NPC npc = null;
-            if (m_WaitingNPCs.Count == 0)
-                npc = SpawnInNPC();
-            else
-                npc = m_WaitingNPCs.Dequeue(); //grab from the queue
+            NPC npc = SpawnInNPC();
+            GetNPCToQueue(npc);
+        }
+    }
 
-            ////add NPC to queue and get the queue position
-            for (int i = 0; i < m_CustomersInQueue.Length; ++i)
-            {
-                if (m_CustomersInQueue[i] != null)
-                    continue;
+    private void GetNPCToQueue(NPC npc)
+    {
+        //add NPC to queue and get the queue position
+        for (int i = 0; i < m_CustomersInQueue.Length; ++i)
+        {
+            if (m_CustomersInQueue[i] != null)
+                continue;
 
-                Vector3 leavePos = m_LeavePos[Random.Range(0, m_LeavePos.Length)].position;
-                Vector3 queuePos = m_QueuePositions[i].position;
+            Vector3 leavePos = m_LeavePos[Random.Range(0, m_LeavePos.Length)].position;
+            Vector3 queuePos = m_QueuePositions[i].position;
 
-                //TODO:: the speed, patience time and rotation time 
-                //should be determined based on the current difficulty modifier
-                float patienceTime = 1.0f;
-                float walkSpeed = 1.0f;
-                float rotationSpeed = 1.0f;
+            //TODO:: the speed, patience time and rotation time 
+            //should be determined based on the current difficulty modifier
+            float patienceTime = 1.0f;
+            float walkSpeed = 1.0f;
+            float rotationSpeed = 1.0f;
 
-                npc.InitNPCToQueue(patienceTime, walkSpeed, rotationSpeed, queuePos, leavePos);
+            npc.InitNPCToQueue(patienceTime, walkSpeed, rotationSpeed, queuePos, leavePos);
 
-                m_CustomersInQueue[i] = npc;
+            m_CustomersInQueue[i] = npc;
 
-                ++m_CurrCustomerQueuing;
+            ++m_CurrCustomerQueuing;
 
-                break;
-            }
+            break;
         }
     }
 
@@ -138,5 +150,12 @@ public class NPCManager : MonoBehaviour
         //TODO:: change the material of the NPC and also attach some objects onto the npc
 
         return npc;
+    }
+
+    void NPCLeftQueuePos()
+    {
+        //get the NPC that left
+        //empty the queue position it was taking
+        //-- from the queue numbner
     }
 }

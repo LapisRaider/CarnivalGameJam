@@ -153,19 +153,22 @@ public class NPCManagerData
     public float m_MaxSpawnRate = 0.75f; //spawn rate should increase
     public float m_DefaultSpawnRate = 0.5f;
 
+    [Header("NPC spawn intervals")]
     public float m_MinSpawnInterval = 5.0f; //spawn interval should be decreasing as the time goes
     public float m_DefaultSpawnInterval = 10.0f;
 
-    [Header("NPC data")]
+    [Header("NPC Speed data")]
     //will increase as time goes
     public float m_NPCMaxSpeed = 1.0f;
     public float m_NPCDefaultSpeed = 1.0f;
 
+    [Header("NPC Rotation Speed data")]
     //will increase as time goes
     public float m_NPCMaxRotationSpeed = 1.0f;
     public float m_NPCDefaultRotationSpeed = 1.0f;
 
     //will decrease as time goes
+    [Header("NPC Patience Timing")]
     public float m_NPCDefaultPatienceTime = 2.0f;
     public float m_NPCMinPatienceTime = 2.0f;
 

@@ -1742,32 +1742,33 @@ MonoBehaviour:
   m_Props: []
   m_QueuePositions:
   - {fileID: 543450653395209156}
-  - {fileID: 543450653395209156}
-  - {fileID: 543450653395209156}
   m_LeavePos:
   - {fileID: 1428172995}
   - {fileID: 1428172995}
   m_SpawnPos:
   - {fileID: 1428172995}
-  - {fileID: 222094032}
-  - {fileID: 1883017831}
   m_NPCObjPooler:
     m_NPCPrefab: {fileID: 8060074240814750366, guid: d56c6a8cb38bf684594f34fecb9e4371,
       type: 3}
     m_Parent: {fileID: 1723747285}
     m_InitialSpawnAmt: 3
-  m_MaxSpawnRate: 0.75
-  m_MinSpawnRate: 0.5
-  m_MinSpawnInterval: 5
-  m_MaxSpawnInterval: 10
-  m_CurrSpawnInterval: 10
   m_MinCustomersQueuing: 1
-  m_NPCMaxSpeed: 1
-  m_NPCMinSpeed: 1
-  m_NPCMaxRotationSpeed: 1
-  m_NPCMinRotationSpeed: 1
-  m_NPCMaxPatienceTime: 2
-  m_NPCMinPatienceTime: 2
+  m_NPCManagerData:
+    m_MaxSpawnRate: 0.75
+    m_DefaultSpawnRate: 0.5
+    m_MinSpawnInterval: 5
+    m_DefaultSpawnInterval: 10
+    m_NPCMaxSpeed: 1
+    m_NPCDefaultSpeed: 1
+    m_NPCMaxRotationSpeed: 1
+    m_NPCDefaultRotationSpeed: 0.02
+    m_NPCDefaultPatienceTime: 10
+    m_NPCMinPatienceTime: 2
+    m_CurrSpawnRate: 0.5
+    m_CurrSpawnInterval: 10
+    m_CurrNPCMoveSpeed: 1
+    m_CurrNPCRotationSpeed: 1
+    m_CurrNPCPatienceTime: 1
 --- !u!1 &1883017830
 GameObject:
   m_ObjectHideFlags: 0

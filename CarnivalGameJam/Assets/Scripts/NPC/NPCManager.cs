@@ -188,13 +188,11 @@ public class NPCManagerData
 
     public void UpdateBasedOnModifier(float currModifier)
     {
-        //TODO:: FIX THE 1.0F
-
         float modifierCalculator = m_DefaultSpawnRate * currModifier;
         m_CurrSpawnRate = Mathf.Clamp(modifierCalculator, m_DefaultSpawnRate, m_MaxSpawnRate);
 
         //spawn interval
-        modifierCalculator = m_DefaultSpawnInterval * (1.0f - currModifier);
+        modifierCalculator = m_DefaultSpawnInterval * (1.0f / currModifier);
         m_CurrSpawnInterval = Mathf.Clamp(modifierCalculator, m_MinSpawnInterval, m_DefaultSpawnInterval);
 
         //NPC move speed
@@ -206,7 +204,7 @@ public class NPCManagerData
         m_CurrNPCRotationSpeed = Mathf.Clamp(modifierCalculator, m_NPCDefaultRotationSpeed, m_NPCMaxRotationSpeed);
 
         //npc patience time
-        modifierCalculator = m_NPCDefaultPatienceTime * (1.0f - currModifier);
+        modifierCalculator = m_NPCDefaultPatienceTime * (1.0f / currModifier);
         m_CurrNPCPatienceTime = Mathf.Clamp(modifierCalculator, m_NPCMinPatienceTime, m_NPCDefaultPatienceTime);
     }
 }

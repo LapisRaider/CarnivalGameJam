@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameHandler : SingletonBase<GameHandler>
 {
-    //should deal with 
+    [Header("Game UI")]
+    public TextMeshProUGUI m_HighScoreText;
 
-    //should check the current state of the game
-    //should have a happiness modifier
-    //check how much customers had in total
-    //checked how many of them were happy/unhappy
-
+    //difficulty is determined by the number of customers successfully served
+    //formula is = m_MaxDifficultyIncrease * ((curr customer / m_AddDifficultyCustomerInterval) / m_MaxDifficultyCustomer)
+    [Header("DifficultyModifier")]
+    public float m_MaxDifficultyIncrease = 3.0f; // x + 1 times the amount of difficulty
+    public int m_AddDifficultyCustomerInterval = 1; // For x number of customer difficulty will increase
+    public int m_MaxDifficultyInterval = 20;
     private float m_CurrModifierValue = 1.0f;
+
+
+    //checked how many of them were happy/unhappy
 
     private int m_TotalCustomersQueued = 0;
     private int m_TotalCustomersHappy = 0;
@@ -37,8 +43,6 @@ public class GameHandler : SingletonBase<GameHandler>
     // Update is called once per frame
     void Update()
     {
-        // i need do the modifier
-        //best to do based on max number of customers
     }
 
     void UpdateCustomerCounter(bool customerHappy)
@@ -48,15 +52,23 @@ public class GameHandler : SingletonBase<GameHandler>
         if (customerHappy)
         {
             ++m_TotalCustomersHappy;
-            //TODO:: update highscore
+            //TODO:: update highscore and UI
+
+            //TODO:: IF GOT TIME, DO A DIFFICULTY UI
+
+            int difficultyInterval = m_TotalCustomersHappy / m_AddDifficultyCustomerInterval;
+            m_CurrModifierValue = 1.0f + (difficultyInterval / m_MaxDifficultyInterval) * m_MaxDifficultyIncrease;
+            
+            if (ModifierUpdatedCallback != null)
+                ModifierUpdatedCallback.Invoke(m_CurrModifierValue); //invoke the deletgate
         }
 
 
         //TODO:: update happiness UI here
+    }
 
-        //update modifier here
-        //invoke the deletgate
-        if (ModifierUpdatedCallback != null)
-            ModifierUpdatedCallback.Invoke(m_CurrModifierValue);
+    void LoseGame()
+    {
+        //when unhapiness level reach a certain threshold
     }
 }

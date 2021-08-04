@@ -216,6 +216,9 @@ public class NPC : MonoBehaviour
 
     public void TakeBalloon(ColorVariants colorGiven)
     {
+        if (!m_IsWaiting)
+            return;
+
         //TODO:: update UI accordingly
 
         if (colorGiven == m_ColorWanted)

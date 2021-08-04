@@ -16,6 +16,9 @@ public class GameHandler : SingletonBase<GameHandler>
     public int m_MaxDifficultyInterval = 20;
     private float m_CurrModifierValue = 1.0f;
 
+    [Header("Stroop Handler")]
+    public StroopColorTest m_StroopTest = new StroopColorTest();
+
     [Header("HighScore")]
     public int m_DefaultScoreAdded = 20;
     public int m_MaxScoreAdded = 40;
@@ -25,7 +28,7 @@ public class GameHandler : SingletonBase<GameHandler>
     private int m_TotalCustomersQueued = 0;
     private int m_TotalCustomersHappy = 0;
 
-
+    //when modifier gets updated
     public delegate void ModifierUpdated(float currModifier);
     public ModifierUpdated ModifierUpdatedCallback;
 
@@ -38,11 +41,8 @@ public class GameHandler : SingletonBase<GameHandler>
         m_TotalCustomersHappy = 0;
 
         m_CurrModifierValue = 1.0f;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        ModifierUpdatedCallback += m_StroopTest.StroopModifierUpdate;
     }
 
     public void UpdateCustomerCounter(bool customerHappy)
@@ -56,7 +56,7 @@ public class GameHandler : SingletonBase<GameHandler>
             //update difficulty modifier
             int difficultyInterval = (int)((float)m_TotalCustomersHappy / (float)m_AddDifficultyCustomerInterval);
             m_CurrModifierValue = 1.0f + ((float)difficultyInterval / (float)m_MaxDifficultyInterval) * m_MaxDifficultyIncrease;
-            
+
             if (ModifierUpdatedCallback != null)
                 ModifierUpdatedCallback.Invoke(m_CurrModifierValue); //invoke the deletgate
 
@@ -92,5 +92,16 @@ public class GameHandler : SingletonBase<GameHandler>
     {
         //when unhapiness level reach a certain threshold
         //stop game and show gameover screen, or just transition to gameover screen
+    }
+
+    //functions belonging to the stroop color test
+    public StroopTestTypes RandomizeStroopType()
+    {
+        return m_StroopTest.RandomizeStroopType();
+    }
+
+    public Color StroopDefaultColor()
+    {
+        return m_StroopTest.m_StroopDefaultColor;
     }
 }

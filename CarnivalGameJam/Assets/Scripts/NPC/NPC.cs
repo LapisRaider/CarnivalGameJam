@@ -13,7 +13,6 @@ public class NPC : MonoBehaviour
     public GameObject m_SpeechBubble;
     public TextMeshProUGUI m_ColorText;
     public Image m_ColorDefaultImage;
-    public Color m_StroopTextDefaultColor; //TODO:: TEMP VAR PUT IT IN STROOP COLOR TEST
 
     [Header("Npc Effects")]
     public Animator m_Animator;
@@ -170,8 +169,7 @@ public class NPC : MonoBehaviour
 
         Debug.Log("Color wanted " + m_ColorWanted);
 
-        //TODO:: should decide based on the difficulty
-        StroopTestTypes stroopMode = StroopTestTypes.DIFF_TEXT_COLOR;
+        StroopTestTypes stroopMode = GameHandler.Instance.RandomizeStroopType();
 
         if (m_SpeechBubble != null)
             m_SpeechBubble.SetActive(true);
@@ -183,7 +181,8 @@ public class NPC : MonoBehaviour
                     if (m_ColorText == null)
                         return;
 
-                    m_ColorText.color = m_StroopTextDefaultColor;
+                    m_ColorText.enabled = true;
+                    m_ColorText.color = GameHandler.Instance.StroopDefaultColor();
                     m_ColorText.text = ColorData.Instance.GetColorName(m_ColorWanted);
                 }
                 break;

@@ -16,15 +16,15 @@ public class GameHandler : SingletonBase<GameHandler>
     public int m_MaxDifficultyInterval = 20;
     private float m_CurrModifierValue = 1.0f;
 
+    [Header("HighScore")]
+    public int m_DefaultScoreAdded = 20;
+    public int m_MaxScoreAdded = 40;
+    private int m_CurrHighScore = 0;
 
     //checked how many of them were happy/unhappy
-
     private int m_TotalCustomersQueued = 0;
     private int m_TotalCustomersHappy = 0;
 
-    //TODO:: the score should be added based on the current state of the game
-    //when u successfully serve a customer ++ to it
-    //private int m_HighScore = 0;
 
     public delegate void ModifierUpdated(float currModifier);
     public ModifierUpdated ModifierUpdatedCallback;
@@ -52,19 +52,40 @@ public class GameHandler : SingletonBase<GameHandler>
         if (customerHappy)
         {
             ++m_TotalCustomersHappy;
-            //TODO:: update highscore and UI
 
-            //TODO:: IF GOT TIME, DO A DIFFICULTY UI
-
-            int difficultyInterval = m_TotalCustomersHappy / m_AddDifficultyCustomerInterval;
-            m_CurrModifierValue = 1.0f + (difficultyInterval / m_MaxDifficultyInterval) * m_MaxDifficultyIncrease;
+            //update difficulty modifier
+            int difficultyInterval = (int)((float)m_TotalCustomersHappy / (float)m_AddDifficultyCustomerInterval);
+            m_CurrModifierValue = 1.0f + ((float)difficultyInterval / (float)m_MaxDifficultyInterval) * m_MaxDifficultyIncrease;
             
             if (ModifierUpdatedCallback != null)
                 ModifierUpdatedCallback.Invoke(m_CurrModifierValue); //invoke the deletgate
+
+            //TODO:: IF GOT TIME, DO A DIFFICULTY UI
+
+            UpdateAndAddHighScore();
         }
 
+        UpdateHappinessLevels();
+    }
 
-        //TODO:: update happiness UI here
+    public void UpdateAndAddHighScore()
+    {
+        int scoreGained = (int)(m_DefaultScoreAdded * m_CurrModifierValue);
+        scoreGained = Mathf.Clamp(scoreGained, m_DefaultScoreAdded, m_MaxScoreAdded);
+        m_CurrHighScore += scoreGained;
+
+        //TODO:: update highscore and UI
+        if (m_HighScoreText == null)
+            return;
+
+        //TODO:: maybe can lerp the text and do a + add score thing
+        m_HighScoreText.SetText(m_CurrHighScore.ToString());
+    }
+
+    public void UpdateHappinessLevels()
+    {
+        //TODO:: update happiness UI here and check if below threshold
+
     }
 
     void LoseGame()

@@ -8,6 +8,7 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     public bool test;
+    public bool animationTest;
 
     [Header("NPC Texture")]
     private Material m_Material;
@@ -94,9 +95,8 @@ public class NPC : MonoBehaviour
             //AskForBalloon();
             StartCoroutine(StartQueue());
 
-            test = false;
+            test = false;            
         }
-
 
         if (!m_IsWaiting)
             return;
@@ -111,6 +111,8 @@ public class NPC : MonoBehaviour
 
     public void StartNPCAppear(GameObject prop = null, Texture texture = null)
     {
+        m_Animator.SetBool("Walking", false);
+
         if (texture != null)
         {
             m_Material.mainTexture = texture;
@@ -172,7 +174,9 @@ public class NPC : MonoBehaviour
     IEnumerator StartQueue()
     {
         //while havent walk finish to destination
-        while(!WalkToDestination())
+        m_Animator.SetBool("Walking", true);
+
+        while (!WalkToDestination())
         {
             RotateTowardsLocation(); //rotate towards the direction it is walking to
 
@@ -185,6 +189,7 @@ public class NPC : MonoBehaviour
             yield return null;
         }
 
+        m_Animator.SetBool("Walking", false);
         AskForBalloon();
 
         yield return null;
@@ -307,7 +312,7 @@ public class NPC : MonoBehaviour
     IEnumerator StartLeaving()
     {
         //set the animation
-
+        m_Animator.SetBool("Walking", true);
 
         m_NextPos = m_LeaveDestination;
         while (!WalkToDestination())

@@ -74,7 +74,6 @@ public class GameHandler : SingletonBase<GameHandler>
         scoreGained = Mathf.Clamp(scoreGained, m_DefaultScoreAdded, m_MaxScoreAdded);
         m_CurrHighScore += scoreGained;
 
-        //TODO:: update highscore and UI
         if (m_HighScoreText == null)
             return;
 

@@ -1684,6 +1684,7 @@ GameObject:
   - component: {fileID: 1675545920}
   - component: {fileID: 1675545919}
   - component: {fileID: 1675545921}
+  - component: {fileID: 1675545922}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1797,6 +1798,31 @@ MonoBehaviour:
   m_BalloonAnimator: {fileID: 1422216750}
   m_BalloonMaterial: {fileID: 2100000, guid: c51fb959dac728245abf4f5002cc362f, type: 2}
   m_DefaultBalloonColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1675545922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675545918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f086aea5898865a41a85a86c90473c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bDontDestroyOnLoad: 0
+  m_HighScoreText: {fileID: 213613364}
+  m_MaxDifficultyIncrease: 3
+  m_AddDifficultyCustomerInterval: 1
+  m_MaxDifficultyInterval: 20
+  m_StroopTest:
+    m_DefaultTextChance: 10
+    m_DefaultColorChance: 10
+    m_DefaultDiffTextColorChance: 8
+    m_MaxDiffTextColorChance: 70
+    m_StroopDefaultColor: {r: 0, g: 0, b: 0, a: 1}
+  m_DefaultScoreAdded: 20
+  m_MaxScoreAdded: 40
 --- !u!1 &1723747285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +1898,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e791e5bf713a54197ef0848711719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CustomerMaterial: []
+  m_CustomerMaterial:
+  - {fileID: 2800000, guid: da80eeb08afc2d44393ca0c3ccb450ef, type: 3}
+  - {fileID: 2800000, guid: 7a362ccd7f7207a43a886cc38bd0dc88, type: 3}
+  - {fileID: 2800000, guid: c14560c1a9ee75549b75cf9bf07d4a9e, type: 3}
+  - {fileID: 2800000, guid: 1ae6227564e7ab247b098b123ca30461, type: 3}
+  - {fileID: 2800000, guid: 14dc97ae143d5254cbdd1566ecade7fd, type: 3}
+  - {fileID: 2800000, guid: 5b175598215bfd44180be04c79b3fafc, type: 3}
+  - {fileID: 2800000, guid: 24a71f68df099a74f8c50948043d7ff5, type: 3}
+  - {fileID: 2800000, guid: 6e3d5aa2d42bdd54ca9043176eb6da78, type: 3}
   m_Props: []
   m_QueuePositions:
   - {fileID: 543450653395209156}
@@ -1881,11 +1915,15 @@ MonoBehaviour:
   - {fileID: 1428172995}
   m_SpawnPos:
   - {fileID: 1428172995}
+  - {fileID: 222094032}
+  - {fileID: 1883017831}
   m_NPCObjPooler:
     m_NPCPrefab: {fileID: 8060074240814750366, guid: d56c6a8cb38bf684594f34fecb9e4371,
       type: 3}
     m_Parent: {fileID: 1723747285}
     m_InitialSpawnAmt: 3
+    m_NPCDefaultMaterial: {fileID: 2100000, guid: 8beec0b0169cc9a459e8012a8cb16edc,
+      type: 2}
   m_MinCustomersQueuing: 1
   m_NPCManagerData:
     m_MaxSpawnRate: 0.75

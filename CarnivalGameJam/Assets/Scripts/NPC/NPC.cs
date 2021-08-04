@@ -9,6 +9,10 @@ public class NPC : MonoBehaviour
 {
     public bool test;
 
+    [Header("NPC Texture")]
+    private Material m_Material;
+    public Transform m_AllPartsParent;
+
     [Header("UI info")]
     public GameObject m_SpeechBubble;
     public TextMeshProUGUI m_ColorText;
@@ -44,6 +48,22 @@ public class NPC : MonoBehaviour
         ResetNPCUI();
         m_OriginalTransform = transform;
         m_IsWaiting = false;
+    }
+
+    public void CreateMaterial(Material material)
+    {
+        m_Material = new Material(material);
+
+        foreach (Transform child in m_AllPartsParent)
+        {
+            SkinnedMeshRenderer meshRenderer = child.GetComponent<SkinnedMeshRenderer>();
+            if (meshRenderer == null)
+                continue;
+
+            meshRenderer.material = m_Material;
+        }
+
+        //TODO:: should have some sort of spawning animation, like phase in kind
     }
 
     void OnDrawGizmosSelected()
@@ -89,6 +109,20 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void StartNPCAppear(GameObject prop = null, Texture texture = null)
+    {
+        if (texture != null)
+        {
+            m_Material.mainTexture = texture;
+
+            //TODO:: set the texture value here to 0.0f for the alpha, fade it in
+        }
+
+        if (prop != null)
+        {
+            //TODO:: attach prop to hand
+        }
+    }
 
     public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Vector3 queuePos, Vector3 leavePos)
     {

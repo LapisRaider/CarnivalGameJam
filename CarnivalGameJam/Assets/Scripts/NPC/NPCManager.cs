@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     [Header("Object models")]
-    public Material[] m_CustomerMaterial;
+    public Texture[] m_CustomerMaterial;
     public GameObject[] m_Props; //toys and stuff to attach
 
     [Header("Queue Positioning")]
@@ -152,7 +152,6 @@ public class NPCManager : MonoBehaviour
             }
 
             GameObject npcObj = npc.gameObject;
-
             npcObj.transform.position = m_SpawnPos[i].position;
             npcObj.SetActive(true);
 
@@ -160,9 +159,9 @@ public class NPCManager : MonoBehaviour
             if (isWaiting)
                 m_NPCsWaitingRef[i] = npc;
 
-            //TODO:: should have some sort of spawning animation, like phase in kind
-            //npc.spawnIN() //something like that here
-            //TODO:: change the material of the NPC and also attach some objects onto the npc
+            //TODO:: properly set the props and material
+            //should have a randomize chance on whether to change or not for both
+            npc.StartNPCAppear(null, m_CustomerMaterial[Random.Range(0,8)]);
 
             return npc;
         }

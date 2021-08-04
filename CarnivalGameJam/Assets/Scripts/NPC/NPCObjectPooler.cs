@@ -8,6 +8,8 @@ public class NPCObjectPooler
     public GameObject m_Parent;
     public int m_InitialSpawnAmt;
 
+    public Material m_NPCDefaultMaterial;
+
     List<NPC> m_NPCList = new List<NPC>();
 
     public void AddNPCInPooler()
@@ -19,6 +21,7 @@ public class NPCObjectPooler
 
             GameObject npcObj = GameObject.Instantiate(m_NPCPrefab, new Vector3(0.0f, 0, 0), Quaternion.identity);
             NPC npc = npcObj.GetComponent<NPC>();
+            npc.CreateMaterial(m_NPCDefaultMaterial);
             npcObj.SetActive(false);
 
             m_NPCList.Add(npc);

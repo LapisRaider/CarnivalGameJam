@@ -13,18 +13,42 @@ public class NPC : MonoBehaviour
     public GameObject m_SpeechBubble;
     public TextMeshProUGUI m_ColorText;
     public Image m_ColorDefaultImage;
-    public Color m_StroopTextDefaultColor;
+    public Color m_StroopTextDefaultColor; //TODO:: TEMP VAR PUT IT IN STROOP COLOR TEST
+
+    [Header("Npc Effects")]
+    public Animator m_Animator;
 
     [Header("Npc Behavior")]
-    public Animator m_Animator;
     private float m_PatienceTime = 0.0f; //in seconds
-
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
+
+    [Header("Npc Movement")]
+    public float m_StopThreshold = 1.0f; //threshold to stop
+    public float m_RotationStopThreshold = 0.98f;
+    public Rigidbody m_Rididbody;
+
+    // set by npcManager
+    private Vector3 m_NextDestination;
+    private float m_WalkSpeed = 1.0f;
+    private float m_RotationSpeed = 1.0f;
+
+    //for rotation
+    private Transform m_OriginalTransform;
+    public Transform m_NextTransform; //TEMPERARY
+
 
     // Start is called before the first frame update
     void Start()
     {
         ResetNPCUI();
+        m_OriginalTransform = transform;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, m_StopThreshold);
     }
 
     public void ResetNPCUI()
@@ -47,11 +71,15 @@ public class NPC : MonoBehaviour
         //m_PatienceTime -= Time.deltaTime;
         if (test)
         {
-            AskForBalloon();
+            //AskForBalloon();
+            StartCoroutine(WalkToQueue());
+
             test = false;
         }
-            
+        //WalkToDestination();
+        //RotateTowardsLocation();
     }
+
 
     void InitNPC(float patienceTime, Vector3 queueDestination)
     {
@@ -61,6 +89,55 @@ public class NPC : MonoBehaviour
 
         //should init the patience timing here
         //if patience
+    }
+
+    //returns true if destination reached
+    public bool WalkToDestination()
+    {
+        Vector3 dir = m_NextTransform.position - transform.position;
+        dir.Normalize();
+        dir.y = 0.0f;
+
+        transform.position += dir * Time.deltaTime * m_WalkSpeed;
+
+        return Vector2.Distance(m_NextTransform.position, transform.position) <= m_StopThreshold;
+    }
+
+    //returns true if facing the direction
+    public bool RotateTowardsLocation()
+    {
+        Vector3 dir = m_NextTransform.position - transform.position;
+        dir.Normalize();
+        dir.y = 0.0f;
+
+        if (dir == Vector3.zero)
+            return true;
+
+        Quaternion nextRotation = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = Quaternion.Lerp(m_OriginalTransform.rotation, nextRotation, Time.time * m_RotationSpeed);
+
+        return Quaternion.Dot(transform.rotation, nextRotation) >= m_RotationStopThreshold;
+    }
+
+    IEnumerator WalkToQueue()
+    {
+        //while havent walk finish to destination
+        while(!WalkToDestination())
+        {
+            RotateTowardsLocation(); //rotate towards the direction it is walking to
+
+            yield return null;
+        }
+
+        //reach queue, face the player
+        while (!RotateTowardsLocation())
+        {
+            yield return null;
+        }
+
+        AskForBalloon();
+
+        yield return null;
     }
 
     public void AskForBalloon()
@@ -75,7 +152,7 @@ public class NPC : MonoBehaviour
         Debug.Log("Color wanted " + m_ColorWanted);
 
         //TODO:: should decide based on the difficulty
-        StroopTestTypes stroopMode = StroopTestTypes.DEFAULT_COLOR;
+        StroopTestTypes stroopMode = StroopTestTypes.DIFF_TEXT_COLOR;
 
         if (m_SpeechBubble != null)
             m_SpeechBubble.SetActive(true);
@@ -143,6 +220,7 @@ public class NPC : MonoBehaviour
         //play some sad effects
         //decrease happiness level or counter or whatever
         //make sure to rotate towards the direction
+        //put a sad emjoi
 
         Leave();
     }

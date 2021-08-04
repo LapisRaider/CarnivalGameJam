@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 324281232}
   - component: {fileID: 324281231}
   - component: {fileID: 324281233}
+  - component: {fileID: 324281234}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPCs
@@ -155,7 +156,12 @@ MonoBehaviour:
   m_SpeechBubble: {fileID: 1454771499}
   m_ColorText: {fileID: 1782882631}
   m_ColorDefaultImage: {fileID: 1704443278}
-  m_Animator: {fileID: 0}
+  m_StroopTextDefaultColor: {r: 0, g: 0, b: 0, a: 0}
+  m_Animator: {fileID: 980656741}
+  m_StopThreshold: 1
+  m_RotationStopThreshold: 0.98
+  m_Rididbody: {fileID: 0}
+  m_NextTransform: {fileID: 732175906}
 --- !u!4 &324281232
 Transform:
   m_ObjectHideFlags: 0
@@ -180,11 +186,27 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324281230}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.65, y: 1.2, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &324281234
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324281230}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &327173474
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,19 +449,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.095813185
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9953994
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -447,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 169.00401
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1111,6 +1133,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575743088}
   m_CullTransparentMesh: 0
+--- !u!1 &732175905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732175906}
+  m_Layer: 0
+  m_Name: temppos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732175906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732175905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.03, y: -0.14423841, z: 0.69920015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768649183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,6 +1423,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923502921}
   m_CullTransparentMesh: 0
+--- !u!95 &980656741 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 11de9d883ba29e7408300ad1c2cc424b,
+    type: 3}
+  m_PrefabInstance: {fileID: 398040965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201001616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,7 +1656,6 @@ GameObject:
   - component: {fileID: 1428172994}
   - component: {fileID: 1428172993}
   - component: {fileID: 1428172992}
-  - component: {fileID: 1428172991}
   m_Layer: 0
   m_Name: Cube
   m_TagString: NPCs
@@ -1606,23 +1663,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1428172991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428172990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8629c75b955c044ca6f14317fbd3d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: 0
-  m_SpeechBubble: {fileID: 0}
-  m_ColorText: {fileID: 0}
-  m_ColorDefaultImage: {fileID: 0}
-  m_Animator: {fileID: 0}
 --- !u!65 &1428172992
 BoxCollider:
   m_ObjectHideFlags: 0

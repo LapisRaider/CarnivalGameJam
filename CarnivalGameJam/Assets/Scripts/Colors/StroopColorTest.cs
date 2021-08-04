@@ -12,6 +12,7 @@ public class StroopColorTest : MonoBehaviour
     
     //should store the data
     //like store the percentages
+    //have a randomizer
 }
 
 public enum StroopTestTypes

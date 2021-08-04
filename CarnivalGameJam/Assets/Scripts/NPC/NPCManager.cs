@@ -19,6 +19,8 @@ public class NPCManager : MonoBehaviour
     public NPCManagerData m_NPCManagerData;
 
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
+    private NPC[] m_NPCsWaitingRef; //ref to which NPC is in the waiting spawn pos
+
     private NPC[] m_CustomersInQueue; //for customers actually ordering
     private float m_CurrCustomerQueuing = 0;
     private float m_SpawnIntervalTracker = 0.0f;
@@ -30,6 +32,12 @@ public class NPCManager : MonoBehaviour
         for (int i = 0; i < m_QueuePositions.Length; ++i)
         {
             m_CustomersInQueue[i] = null;
+        }
+
+        m_NPCsWaitingRef = new NPC[m_SpawnPos.Length];
+        for (int i = 0; i < m_SpawnPos.Length; ++i)
+        {
+            m_NPCsWaitingRef[i] = null;
         }
 
         m_NPCObjPooler.AddNPCInPooler();
@@ -55,20 +63,38 @@ public class NPCManager : MonoBehaviour
                 float randomRate = Random.Range(0.0f, 1.0f);
                 if (randomRate <= m_NPCManagerData.m_CurrSpawnRate)
                 {
-                    m_WaitingNPCs.Enqueue(SpawnInNPC());
-                    m_SpawnIntervalTracker = m_NPCManagerData.m_CurrSpawnInterval; //reset spawn interval
+                    //need check if got space first and wait
+                    NPC npc = SpawnInNPC(true);
+                    if (npc != null)
+                    {
+                        m_WaitingNPCs.Enqueue(npc);
+                        m_SpawnIntervalTracker = m_NPCManagerData.m_CurrSpawnInterval; //reset spawn interval
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Something wrong with the waiting position tracker");
+                    }
                 }
             }
         }
-
-        //TODO:: fix the waiting list spawn position, so they spawn at the proper positions
 
         //grab from the waiting list and put to queue
         if (m_CurrCustomerQueuing < m_CustomersInQueue.Length)
         {
             if (m_WaitingNPCs.Count != 0)
             {
-                NPC npc = m_WaitingNPCs.Dequeue(); 
+                NPC npc = m_WaitingNPCs.Dequeue();
+
+                //remove them from the waiting reference list
+                for (int i = 0; i < m_NPCsWaitingRef.Length; ++i)
+                {
+                    if (m_NPCsWaitingRef[i] == npc)
+                    {
+                        m_NPCsWaitingRef[i] = null;
+                        break;
+                    }
+                }
+
                 GetNPCToQueue(npc);
             }
         }
@@ -104,7 +130,7 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    private NPC SpawnInNPC()
+    private NPC SpawnInNPC(bool isWaiting = false)
     {
         if (m_SpawnPos.Length == 0)
         {
@@ -112,23 +138,36 @@ public class NPCManager : MonoBehaviour
             return null;
         }
 
-        NPC npc = m_NPCObjPooler.GetNPC();
-        if (npc == null)
+        //search for an empty waiting position
+        for (int i = 0; i < m_NPCsWaitingRef.Length; ++i)
         {
-            Debug.LogWarning("No NPC being spawned from pooler");
-            return null;
+            if (m_NPCsWaitingRef[i] != null)
+                continue;
+
+            NPC npc = m_NPCObjPooler.GetNPC();
+            if (npc == null)
+            {
+                Debug.LogWarning("No NPC being spawned from pooler");
+                return null;
+            }
+
+            GameObject npcObj = npc.gameObject;
+
+            npcObj.transform.position = m_SpawnPos[i].position;
+            npcObj.SetActive(true);
+
+            //waiting to be queued, so no npc should spawn at this position anymore
+            if (isWaiting)
+                m_NPCsWaitingRef[i] = npc;
+
+            //TODO:: should have some sort of spawning animation, like phase in kind
+            //npc.spawnIN() //something like that here
+            //TODO:: change the material of the NPC and also attach some objects onto the npc
+
+            return npc;
         }
 
-        GameObject npcObj = npc.gameObject;
-        npcObj.transform.position = m_SpawnPos[Random.Range(0, m_SpawnPos.Length)].position;
-
-        npcObj.SetActive(true);
-
-        //TODO:: should have some sort of spawning animation, like phase in kind
-        //npc.spawnIN() //something like that here
-        //TODO:: change the material of the NPC and also attach some objects onto the npc
-
-        return npc;
+        return null;
     }
 
     void NPCLeftQueuePos(NPC npc)

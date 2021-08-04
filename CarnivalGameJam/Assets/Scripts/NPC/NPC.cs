@@ -23,6 +23,9 @@ public class NPC : MonoBehaviour
     private float m_PatienceTime = 0.0f; //in seconds
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
 
+    public delegate void OnLeavingQueue(NPC npc);
+    public OnLeavingQueue OnLeftQueueCallback;
+
     [Header("Npc Movement")]
     public float m_StopThreshold = 1.0f; //threshold to stop
     public float m_RotationStopThreshold = 0.98f;
@@ -34,7 +37,7 @@ public class NPC : MonoBehaviour
     //for positions
     private Transform m_OriginalTransform;
     private Vector3 m_NextPos;
-    private Vector3 m_LeaveDestination; 
+    private Vector3 m_LeaveDestination;
 
     // Start is called before the first frame update
     void Start()
@@ -154,24 +157,6 @@ public class NPC : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator StartLeaving()
-    {
-        //set the animation
-
-
-        m_NextPos = m_LeaveDestination;
-        while (!WalkToDestination())
-        {
-            RotateTowardsLocation(); //rotate towards the direction it is walking to
-
-            yield return null;
-        }
-
-        gameObject.SetActive(false); //out of screen
-
-        yield return null;
-    }
-
     public void AskForBalloon()
     {
         m_IsWaiting = true; //start waiting
@@ -274,6 +259,27 @@ public class NPC : MonoBehaviour
     {
         m_IsWaiting = false;
 
+        if (OnLeftQueueCallback != null)
+            OnLeftQueueCallback.Invoke(this);
+
         StartCoroutine(StartLeaving());
+    }
+
+    IEnumerator StartLeaving()
+    {
+        //set the animation
+
+
+        m_NextPos = m_LeaveDestination;
+        while (!WalkToDestination())
+        {
+            RotateTowardsLocation(); //rotate towards the direction it is walking to
+
+            yield return null;
+        }
+
+        gameObject.SetActive(false); //out of screen
+
+        yield return null;
     }
 }

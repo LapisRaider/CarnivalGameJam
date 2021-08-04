@@ -47,9 +47,6 @@ public class NPCManager : MonoBehaviour
     
 
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +113,7 @@ public class NPCManager : MonoBehaviour
             float rotationSpeed = 1.0f;
 
             npc.InitNPCToQueue(patienceTime, walkSpeed, rotationSpeed, queuePos, leavePos);
+            npc.OnLeftQueueCallback += NPCLeftQueuePos; //set the callback
 
             m_CustomersInQueue[i] = npc;
 
@@ -152,10 +150,21 @@ public class NPCManager : MonoBehaviour
         return npc;
     }
 
-    void NPCLeftQueuePos()
+    void NPCLeftQueuePos(NPC npc)
     {
-        //get the NPC that left
-        //empty the queue position it was taking
-        //-- from the queue numbner
+        npc.OnLeftQueueCallback -= NPCLeftQueuePos; //remove the callback
+        --m_CurrCustomerQueuing;
+
+        for (int i = 0; i < m_CustomersInQueue.Length; ++i)
+        {
+            if (m_CustomersInQueue[i] == null)
+                continue;
+
+            if (npc != m_CustomersInQueue[i])
+                continue;
+
+            m_CustomersInQueue[i] = null;
+            break;
+        }
     }
 }

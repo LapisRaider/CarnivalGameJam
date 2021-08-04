@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class NPCObjectPooler
 {
     public GameObject m_NPCPrefab;
@@ -9,8 +10,7 @@ public class NPCObjectPooler
 
     List<NPC> m_NPCList = new List<NPC>();
 
-    // Start is called before the first frame update
-    public void SpawnNPC()
+    public void AddNPCInPooler()
     {
         for (int i = 0; i < m_InitialSpawnAmt; ++i)
         {
@@ -33,7 +33,7 @@ public class NPCObjectPooler
                 return npc;
         }
 
-        SpawnNPC();
+        AddNPCInPooler();
 
         return GetNPC();
     }

@@ -19,6 +19,7 @@ public class NPC : MonoBehaviour
     public Animator m_Animator;
 
     [Header("Npc Behavior")]
+    private bool m_IsWaiting = false;
     private float m_PatienceTime = 0.0f; //in seconds
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
 
@@ -28,20 +29,20 @@ public class NPC : MonoBehaviour
     public Rigidbody m_Rididbody;
 
     // set by npcManager
-    private Vector3 m_NextDestination;
     private float m_WalkSpeed = 1.0f;
     private float m_RotationSpeed = 1.0f;
 
-    //for rotation
+    //for positions
     private Transform m_OriginalTransform;
-    public Transform m_NextTransform; //TEMPERARY
-
+    private Vector3 m_NextPos;
+    private Vector3 m_LeaveDestination; 
 
     // Start is called before the first frame update
     void Start()
     {
         ResetNPCUI();
         m_OriginalTransform = transform;
+        m_IsWaiting = false;
     }
 
     void OnDrawGizmosSelected()
@@ -67,46 +68,58 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //reduce the patienceTime, if patience tim e = 0, quit
-        //m_PatienceTime -= Time.deltaTime;
+        if (!m_IsWaiting)
+            return;
+
+        m_PatienceTime -= Time.deltaTime; //reduce the patienceTime
+        //TODO:: UPDATE SOME UI TO SHOW THE TIME LEFT
+        if (m_PatienceTime <= 0.0f)
+        {      
+            Sad(); //Leave and sad
+        }
+        
+
         if (test)
         {
-            //AskForBalloon();
-            StartCoroutine(WalkToQueue());
+            AskForBalloon();
+            //StartCoroutine(StartQueue());
 
             test = false;
         }
-        //WalkToDestination();
-        //RotateTowardsLocation();
     }
 
 
-    void InitNPC(float patienceTime, Vector3 queueDestination)
+    public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Vector3 queuePos, Vector3 leavePos)
     {
         m_PatienceTime = patienceTime;
-        //should walk to destination
-        //after walking to destination call the askForBalloon
+        m_NextPos = queuePos;
+        m_LeaveDestination = leavePos;
 
-        //should init the patience timing here
-        //if patience
+        m_WalkSpeed = walkSpeed;
+        m_RotationSpeed = rotationSpeed;
+
+        m_OriginalTransform = transform;
+        m_IsWaiting = false;
+
+        StartCoroutine(StartQueue());
     }
 
     //returns true if destination reached
     public bool WalkToDestination()
     {
-        Vector3 dir = m_NextTransform.position - transform.position;
+        Vector3 dir = m_NextPos - transform.position;
         dir.Normalize();
         dir.y = 0.0f;
 
         transform.position += dir * Time.deltaTime * m_WalkSpeed;
 
-        return Vector2.Distance(m_NextTransform.position, transform.position) <= m_StopThreshold;
+        return Vector2.Distance(m_NextPos, transform.position) <= m_StopThreshold;
     }
 
     //returns true if facing the direction
     public bool RotateTowardsLocation()
     {
-        Vector3 dir = m_NextTransform.position - transform.position;
+        Vector3 dir = m_NextPos - transform.position;
         dir.Normalize();
         dir.y = 0.0f;
 
@@ -119,7 +132,7 @@ public class NPC : MonoBehaviour
         return Quaternion.Dot(transform.rotation, nextRotation) >= m_RotationStopThreshold;
     }
 
-    IEnumerator WalkToQueue()
+    IEnumerator StartQueue()
     {
         //while havent walk finish to destination
         while(!WalkToDestination())
@@ -140,8 +153,28 @@ public class NPC : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator StartLeaving()
+    {
+        //set the animation
+
+
+        m_NextPos = m_LeaveDestination;
+        while (!WalkToDestination())
+        {
+            RotateTowardsLocation(); //rotate towards the direction it is walking to
+
+            yield return null;
+        }
+
+        gameObject.SetActive(false); //out of screen
+
+        yield return null;
+    }
+
     public void AskForBalloon()
     {
+        m_IsWaiting = true; //start waiting
+
         //set the UI to true
         if (m_SpeechBubble != null)
             m_SpeechBubble.SetActive(false);
@@ -192,7 +225,7 @@ public class NPC : MonoBehaviour
                 break;
             default:
                 break;
-        }    
+        }
     }
 
     public void TakeBalloon(ColorVariants colorGiven)
@@ -238,6 +271,8 @@ public class NPC : MonoBehaviour
     //leave the qeueing position
     public void Leave()
     {
+        m_IsWaiting = false;
 
+        StartCoroutine(StartLeaving());
     }
 }

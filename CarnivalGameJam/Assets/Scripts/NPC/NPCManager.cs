@@ -21,6 +21,10 @@ public class NPCManager : MonoBehaviour
     private float m_CurrSpawnRate = 0.5f;
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
 
+    //SPAWN INTERVAL
+
+
+
     public float m_MinCustomersQueuing = 1; //if less than this number spawn in immediately
     private float m_CurrCustomerQueuing = 0;
     private NPC[] m_CustomersInQueue; //for customers actually ordering
@@ -62,18 +66,17 @@ public class NPCManager : MonoBehaviour
         //there should some NPCs at the back just chilling
 
         //CHECK THE CURRENT GAME STATE AND GET A MULTIPLIER FROM IT
+        //m_CurrSpawnRate UPDATE THIS
 
 
-        //NPC npc = m_NPCObjPooler.GetNPC();
-        //m_SpawnPos
-        //if (m_WaitingNPCs.Count < m_SpawnPos.Length)
-        //{
-        //    float randomRate = Random.Range(0.0f, 1.0f);
-        //    if (randomRate <= m_CurrSpawnRate)
-        //    {
-        //        m_WaitingNPCs.Enqueue(SpawnInNPC());
-        //    }
-        //}
+        if (m_WaitingNPCs.Count < m_SpawnPos.Length)
+        {
+            float randomRate = Random.Range(0.0f, 1.0f);
+            if (randomRate <= m_CurrSpawnRate)
+            {
+                m_WaitingNPCs.Enqueue(SpawnInNPC());
+            }
+        }
 
         //if not enough customers ordering the balloon, spawn some immediately
         if (m_CurrCustomerQueuing < m_MinCustomersQueuing)

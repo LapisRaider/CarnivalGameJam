@@ -92,8 +92,10 @@ public class NPC : MonoBehaviour
     public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Vector3 queuePos, Vector3 leavePos)
     {
         m_PatienceTime = patienceTime;
-        m_NextPos = queuePos;
         m_LeaveDestination = leavePos;
+        m_LeaveDestination.y = 0.0f;
+        m_NextPos = queuePos;
+        m_NextPos.y = 0.0f;
 
         m_WalkSpeed = walkSpeed;
         m_RotationSpeed = rotationSpeed;
@@ -107,21 +109,21 @@ public class NPC : MonoBehaviour
     //returns true if destination reached
     public bool WalkToDestination()
     {
-        Vector3 dir = m_NextPos - transform.position;
+        Vector3 currPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
+        Vector3 dir = m_NextPos - currPos;
         dir.Normalize();
-        dir.y = 0.0f;
 
         transform.position += dir * Time.deltaTime * m_WalkSpeed;
 
-        return Vector2.Distance(m_NextPos, transform.position) <= m_StopThreshold;
+        return Vector2.Distance(m_NextPos, currPos) <= m_StopThreshold;
     }
 
     //returns true if facing the direction
     public bool RotateTowardsLocation()
     {
-        Vector3 dir = m_NextPos - transform.position;
+        Vector3 currPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
+        Vector3 dir = m_NextPos - currPos;
         dir.Normalize();
-        dir.y = 0.0f;
 
         if (dir == Vector3.zero)
             return true;

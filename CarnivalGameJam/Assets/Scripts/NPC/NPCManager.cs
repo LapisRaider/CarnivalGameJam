@@ -19,8 +19,9 @@ public class NPCManager : MonoBehaviour
     public NPCManagerData m_NPCManagerData;
 
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
-    private float m_CurrCustomerQueuing = 0;
     private NPC[] m_CustomersInQueue; //for customers actually ordering
+    private float m_CurrCustomerQueuing = 0;
+    private float m_SpawnIntervalTracker = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,34 +35,45 @@ public class NPCManager : MonoBehaviour
         m_NPCObjPooler.AddNPCInPooler();
         m_NPCManagerData.Init();
 
+        m_SpawnIntervalTracker = m_NPCManagerData.m_DefaultSpawnInterval;
+
         GameHandler.Instance.ModifierUpdatedCallback += UpdateNPCDataModifiers;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
-        //TODO:: MAKE SURE TO ADD SOME SORT OF TIMER HERE for spawning
-        if (m_WaitingNPCs.Count < m_SpawnPos.Length)
+        if (m_SpawnIntervalTracker >= 0.0f)
         {
-            float randomRate = Random.Range(0.0f, 1.0f);
-            if (randomRate <= m_NPCManagerData.m_CurrSpawnRate)
+            m_SpawnIntervalTracker -= Time.deltaTime;
+        }
+        else
+        {
+            //spawn NPCs into waiting list and positions
+            if (m_WaitingNPCs.Count < m_SpawnPos.Length)
             {
-                m_WaitingNPCs.Enqueue(SpawnInNPC());
+                float randomRate = Random.Range(0.0f, 1.0f);
+                if (randomRate <= m_NPCManagerData.m_CurrSpawnRate)
+                {
+                    m_WaitingNPCs.Enqueue(SpawnInNPC());
+                    m_SpawnIntervalTracker = m_NPCManagerData.m_CurrSpawnInterval; //reset spawn interval
+                }
             }
         }
 
+        //TODO:: fix the waiting list spawn position, so they spawn at the proper positions
+
+        //grab from the waiting list and put to queue
         if (m_CurrCustomerQueuing < m_CustomersInQueue.Length)
         {
             if (m_WaitingNPCs.Count != 0)
             {
-                NPC npc = m_WaitingNPCs.Dequeue(); //grab from the queue
+                NPC npc = m_WaitingNPCs.Dequeue(); 
                 GetNPCToQueue(npc);
             }
         }
 
-        //if not enough customers ordering the balloon, spawn some immediately
+        //if not enough customers ordering the balloon, and none in waiting list, spawn some immediately
         if (m_CurrCustomerQueuing < m_MinCustomersQueuing)
         {
             NPC npc = SpawnInNPC();

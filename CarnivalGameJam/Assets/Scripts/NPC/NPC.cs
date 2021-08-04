@@ -219,10 +219,13 @@ public class NPC : MonoBehaviour
         if (!m_IsWaiting)
             return;
 
-        //TODO:: update UI accordingly
+        bool customerHappy = colorGiven == m_ColorWanted;
+        GameHandler.Instance.UpdateCustomerCounter(customerHappy);
 
-        if (colorGiven == m_ColorWanted)
+        if (customerHappy)
         {
+            //TODO:: update UI accordingly
+
             Debug.Log(m_ColorWanted);
             Happy();
         }

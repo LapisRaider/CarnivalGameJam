@@ -45,7 +45,7 @@ public class GameHandler : SingletonBase<GameHandler>
     {
     }
 
-    void UpdateCustomerCounter(bool customerHappy)
+    public void UpdateCustomerCounter(bool customerHappy)
     {
         ++m_TotalCustomersQueued;
 
@@ -70,5 +70,6 @@ public class GameHandler : SingletonBase<GameHandler>
     void LoseGame()
     {
         //when unhapiness level reach a certain threshold
+        //stop game and show gameover screen, or just transition to gameover screen
     }
 }

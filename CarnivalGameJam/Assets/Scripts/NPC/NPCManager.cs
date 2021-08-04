@@ -33,16 +33,15 @@ public class NPCManager : MonoBehaviour
 
         m_NPCObjPooler.AddNPCInPooler();
         m_NPCManagerData.Init();
+
+        GameHandler.Instance.ModifierUpdatedCallback += UpdateNPCDataModifiers;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //TODO CHECK THE CURRENT GAME STATE AND GET A MULTIPLIER FROM IT
-        //m_CurrSpawnRate UPDATE THIS
-
-
+        
+        
         //TODO:: MAKE SURE TO ADD SOME SORT OF TIMER HERE for spawning
         if (m_WaitingNPCs.Count < m_SpawnPos.Length)
         {
@@ -138,10 +137,8 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    //TODO:: REMEMBER TO ADD THIS TO THE DELEGATE
     private void UpdateNPCDataModifiers(float currModifier)
     {
-        //spawn rate
         m_NPCManagerData.UpdateBasedOnModifier(currModifier);
     }
 }

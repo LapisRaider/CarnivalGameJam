@@ -13,39 +13,17 @@ public class NPCManager : MonoBehaviour
     public Transform[] m_LeavePos;
     public Transform[] m_SpawnPos; //places to spawn the NPC at
 
-    [Header("Customer spawning")]
+    [Header("Customer spawning Rates")]
     public NPCObjectPooler m_NPCObjPooler = new NPCObjectPooler();
+    public float m_MinCustomersQueuing = 1; //if less than this number spawn in immediately
+    public NPCManagerData m_NPCManagerData;
 
-    public float m_MaxSpawnRate = 0.75f;
-    public float m_MinSpawnRate = 0.5f;
+    public float m_CurrSpawnInterval = 10.0f;
     private float m_CurrSpawnRate = 0.5f;
     private Queue<NPC> m_WaitingNPCs = new Queue<NPC>(); //for npcs waiting to get into queue
 
-    //SPAWN INTERVAL
-    public float m_MinSpawnInterval = 5.0f;
-    public float m_MaxSpawnInterval = 10.0f;
-    public float m_CurrSpawnInterval = 10.0f;
-
-
-
-    public float m_MinCustomersQueuing = 1; //if less than this number spawn in immediately
     private float m_CurrCustomerQueuing = 0;
     private NPC[] m_CustomersInQueue; //for customers actually ordering
-
-
-    [Header("NPC data")]
-    //will increase as time goes
-    public float m_NPCMaxSpeed = 1.0f; 
-    public float m_NPCMinSpeed = 1.0f;
-
-    public float m_NPCMaxRotationSpeed = 1.0f;
-    public float m_NPCMinRotationSpeed = 1.0f;
-
-    //will decrease as time goes
-    public float m_NPCMaxPatienceTime = 2.0f;
-    public float m_NPCMinPatienceTime = 2.0f; 
-    
-
 
     // Start is called before the first frame update
     void Start()
@@ -62,13 +40,12 @@ public class NPCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //there should some NPCs at the back just chilling
 
-        //CHECK THE CURRENT GAME STATE AND GET A MULTIPLIER FROM IT
+        //TODO CHECK THE CURRENT GAME STATE AND GET A MULTIPLIER FROM IT
         //m_CurrSpawnRate UPDATE THIS
 
 
-        //MAKE SURE TO ADD SOME SORT OF TIMER HERE TODO::
+        //TODO:: MAKE SURE TO ADD SOME SORT OF TIMER HERE for spawning
         if (m_WaitingNPCs.Count < m_SpawnPos.Length)
         {
             float randomRate = Random.Range(0.0f, 1.0f);
@@ -144,7 +121,7 @@ public class NPCManager : MonoBehaviour
         npcObj.SetActive(true);
 
         //TODO:: should have some sort of spawning animation, like phase in kind
-        //npc.spawnIN() //something here
+        //npc.spawnIN() //something like that here
         //TODO:: change the material of the NPC and also attach some objects onto the npc
 
         return npc;
@@ -167,4 +144,27 @@ public class NPCManager : MonoBehaviour
             break;
         }
     }
+}
+
+[System.Serializable]
+public class NPCManagerData
+{
+    [Header("Customer spawning Rates")]
+    public float m_MaxSpawnRate = 0.75f;
+    public float m_MinSpawnRate = 0.5f;
+
+    public float m_MinSpawnInterval = 5.0f;
+    public float m_MaxSpawnInterval = 10.0f;
+
+    [Header("NPC data")]
+    //will increase as time goes
+    public float m_NPCMaxSpeed = 1.0f;
+    public float m_NPCMinSpeed = 1.0f;
+
+    public float m_NPCMaxRotationSpeed = 1.0f;
+    public float m_NPCMinRotationSpeed = 1.0f;
+
+    //will decrease as time goes
+    public float m_NPCMaxPatienceTime = 2.0f;
+    public float m_NPCMinPatienceTime = 2.0f;
 }

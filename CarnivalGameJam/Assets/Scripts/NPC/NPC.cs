@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 using TMPro;
 
 public class NPC : MonoBehaviour
@@ -10,6 +12,8 @@ public class NPC : MonoBehaviour
     [Header("UI info")]
     public GameObject m_SpeechBubble;
     public TextMeshProUGUI m_ColorText;
+    public Image m_ColorDefaultImage;
+    public Color m_StroopTextDefaultColor;
 
     [Header("Npc Behavior")]
     public Animator m_Animator;
@@ -20,7 +24,18 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResetNPCUI();
+    }
+
+    public void ResetNPCUI()
+    {
         //set the UI inactive
+        if (m_ColorText != null)
+            m_ColorText.enabled = false;
+
+        if (m_ColorDefaultImage != null)
+            m_ColorDefaultImage.enabled = false;
+
         if (m_SpeechBubble != null)
             m_SpeechBubble.SetActive(false);
     }
@@ -58,21 +73,55 @@ public class NPC : MonoBehaviour
         m_ColorWanted = (ColorVariants)Random.Range((int)(ColorVariants.RED), (int)(ColorVariants.COLORLESS));
 
         Debug.Log("Color wanted " + m_ColorWanted);
+
         //TODO:: should decide based on the difficulty
-        //must first check which mode to go for
-        //need see whether to go for the different color
-        // or the normal version for text, if this version show the text, text make black
-        //or the normal just color version, if this version, show the square, change color
+        StroopTestTypes stroopMode = StroopTestTypes.DEFAULT_COLOR;
 
-        if (m_ColorText == null)
-            return;
+        if (m_SpeechBubble != null)
+            m_SpeechBubble.SetActive(true);
 
-        m_ColorText.color = ColorData.Instance.GetColor(m_ColorWanted);
-        m_ColorText.text = ColorData.Instance.GetColorName(m_ColorWanted);
+        switch (stroopMode)
+        {
+            case StroopTestTypes.DEFAULT_TEXT: //normal version for text
+                {
+                    if (m_ColorText == null)
+                        return;
+
+                    m_ColorText.color = m_StroopTextDefaultColor;
+                    m_ColorText.text = ColorData.Instance.GetColorName(m_ColorWanted);
+                }
+                break;
+            case StroopTestTypes.DEFAULT_COLOR: //just show a color instead
+                {
+                    if (m_ColorDefaultImage == null)
+                        return;
+
+                    m_ColorDefaultImage.enabled = true;
+                    m_ColorDefaultImage.color = ColorData.Instance.GetColor(m_ColorWanted);
+                }
+                break;
+            case StroopTestTypes.DIFF_TEXT_COLOR: //show correct color diff text
+                {
+                    if (m_ColorText == null)
+                        return;
+
+                    m_ColorText.enabled = true;
+                    m_ColorText.color = ColorData.Instance.GetColor(m_ColorWanted);
+
+                    //randomize the text
+                    ColorVariants randomColor = (ColorVariants)Random.Range((int)(ColorVariants.RED), (int)(ColorVariants.COLORLESS));
+                    m_ColorText.text = ColorData.Instance.GetColorName(randomColor);
+                }
+                break;
+            default:
+                break;
+        }    
     }
 
     public void TakeBalloon(ColorVariants colorGiven)
     {
+        //TODO:: update UI accordingly
+
         if (colorGiven == m_ColorWanted)
         {
             Debug.Log(m_ColorWanted);

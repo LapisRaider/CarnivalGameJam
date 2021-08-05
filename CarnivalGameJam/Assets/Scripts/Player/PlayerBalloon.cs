@@ -92,8 +92,6 @@ public class PlayerBalloon : MonoBehaviour
     {
         m_CurrentColor = ColorData.Instance.AddColor(m_CurrentMix);
 
-        //TODO:: change balloon color and do all the special effects
-
         if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");

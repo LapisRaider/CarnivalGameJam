@@ -82,7 +82,7 @@ public class NPCManager : MonoBehaviour
                 }
 
 
-                m_SpawnIntervalTracker = m_NPCManagerData.m_DefaultSpawnInterval; //reset spawn interval
+                m_SpawnIntervalTracker = m_NPCManagerData.m_CurrSpawnInterval; //reset spawn interval
             }
         }
 

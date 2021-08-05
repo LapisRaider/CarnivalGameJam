@@ -250,6 +250,17 @@ public class NPC : MonoBehaviour
 
                     m_ColorDefaultImage.enabled = true;
                     m_ColorDefaultImage.color = ColorData.Instance.GetColor(m_ColorWanted);
+                    m_ColorText.text = ColorData.Instance.GetColorName(m_ColorWanted);
+                }
+                break;
+            case StroopTestTypes.SAME_COLOR_TEXT:
+                {
+                    if (m_ColorDefaultImage == null)
+                        return;
+
+                    m_ColorText.enabled = true;
+                    m_ColorText.text = ColorData.Instance.GetColorName(m_ColorWanted);
+                    m_ColorText.color = ColorData.Instance.GetColor(m_ColorWanted);
                 }
                 break;
             case StroopTestTypes.DIFF_TEXT_COLOR: //show correct color diff text
@@ -321,6 +332,7 @@ public class NPC : MonoBehaviour
     public void Leave()
     {
         m_IsWaiting = false;
+        ResetNPCUI();
 
         if (OnLeftQueueCallback != null)
             OnLeftQueueCallback.Invoke(this);

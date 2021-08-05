@@ -3821,8 +3821,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
+      propertyPath: lengthInSec
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3841,8 +3846,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
+      propertyPath: lengthInSec
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240070762128, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3853,6 +3863,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: bDontDestroyOnLoad
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_StroopTest.m_SameColorChance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_StroopTest.m_DefaultTextChance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_StroopTest.m_DefaultColorChance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_StroopTest.m_MaxDiffTextColorChance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_StroopTest.m_DefaultDiffTextColorChance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240256735679, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -4012,7 +4052,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_DefaultSpawnRate
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -4022,7 +4062,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_NPCMinPatienceTime
-      value: 3
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -4032,7 +4072,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_DefaultSpawnInterval
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -4046,8 +4086,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
+      propertyPath: lengthInSec
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6702618019664023355, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}

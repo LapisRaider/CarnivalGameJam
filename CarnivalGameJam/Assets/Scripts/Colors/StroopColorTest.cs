@@ -6,6 +6,7 @@ public class StroopColorTest
     [Header("Chances")]
     public int m_DefaultTextChance = 33;
     public int m_DefaultColorChance = 33;
+    public int m_SameColorChance = 33;
 
     [Header("Chances diff text color")]
     public int m_DefaultDiffTextColorChance = 10;
@@ -29,16 +30,23 @@ public class StroopColorTest
 
     public StroopTestTypes RandomizeStroopType()
     {
-        int totalChance = m_DefaultColorChance + m_DefaultTextChance + m_CurrDiffTextColorChance;
+        int totalChance = m_DefaultColorChance + m_DefaultTextChance + m_SameColorChance + m_CurrDiffTextColorChance;
         int randomized = Random.Range(0, totalChance);
 
-        if (randomized <= m_DefaultTextChance) //default text
+        Debug.Log("RANDOMIZED NUMBER " + randomized);
+        Debug.Log("total NUMBER " + totalChance);
+
+        if (randomized < m_DefaultTextChance) //default text
         {
             return StroopTestTypes.DEFAULT_TEXT;
         }
-        else if (randomized <= m_DefaultTextChance + m_DefaultColorChance) //default color
+        else if (randomized < m_DefaultTextChance + m_DefaultColorChance) //default color
         {
             return StroopTestTypes.DEFAULT_COLOR;
+        }
+        else if (randomized < m_DefaultTextChance + m_DefaultColorChance + m_SameColorChance)
+        {
+            return StroopTestTypes.SAME_COLOR_TEXT;
         }
         else
         {
@@ -51,5 +59,6 @@ public enum StroopTestTypes
 {
     DEFAULT_TEXT, //text of color is just displayed
     DEFAULT_COLOR, //default color, just show the color
+    SAME_COLOR_TEXT, //same color and text
     DIFF_TEXT_COLOR, //randomize the color and text
 }

@@ -13,6 +13,11 @@ public class PlayerBalloon : MonoBehaviour
     [Header("Balloon Effects")]
     public ParticleSystem m_BurstBalloonParticles;
 
+    [Header("Paint Particle Effects")]
+    public ParticleSystem m_RedSpray;
+    public ParticleSystem m_BlueSpray;
+    public ParticleSystem m_YellowSpray;
+
     private ColorVariants m_CurrentColor = ColorVariants.COLORLESS;
     private ColorMixes m_CurrentMix;
 
@@ -104,6 +109,9 @@ public class PlayerBalloon : MonoBehaviour
         if (m_CurrentMix.m_Blue)
             return;
 
+        if (m_BlueSpray != null)
+            m_BlueSpray.Play();
+
         m_CurrentMix.m_Blue = true;
         ChangeBalloonColor();
     }
@@ -114,6 +122,9 @@ public class PlayerBalloon : MonoBehaviour
         if (m_CurrentMix.m_Red)
             return;
 
+        if (m_RedSpray != null)
+            m_RedSpray.Play();
+
         m_CurrentMix.m_Red = true;
         ChangeBalloonColor();
     }
@@ -123,6 +134,9 @@ public class PlayerBalloon : MonoBehaviour
         //if already true ignore
         if (m_CurrentMix.m_Yellow)
             return;
+
+        if (m_YellowSpray != null)
+            m_YellowSpray.Play();
 
         m_CurrentMix.m_Yellow = true;
         ChangeBalloonColor();

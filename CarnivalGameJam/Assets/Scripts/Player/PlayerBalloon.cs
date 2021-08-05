@@ -10,8 +10,8 @@ public class PlayerBalloon : MonoBehaviour
     public Material m_BalloonMaterial;
     public Color m_DefaultBalloonColor; //default balloon color
 
-    //[Header("Spray Effect")]
-    //particle effects for spraying at the balloon
+    [Header("Balloon Effects")]
+    public ParticleSystem m_BurstBalloonParticles;
 
     private ColorVariants m_CurrentColor = ColorVariants.COLORLESS;
     private ColorMixes m_CurrentMix;
@@ -73,8 +73,12 @@ public class PlayerBalloon : MonoBehaviour
     //for the player to reset the balloon by popping it
     public void PopBalloon()
     {
-        //TODO:: play the popping balloon animation
-        //after finish popping balloon, reset balloon
+        if (m_BurstBalloonParticles != null)
+        {
+            m_BurstBalloonParticles.Play();
+            var particleSettings = m_BurstBalloonParticles.main;
+            particleSettings.startColor = ColorData.Instance.GetColor(m_CurrentColor);
+        }
 
         ResetBalloon();
     }

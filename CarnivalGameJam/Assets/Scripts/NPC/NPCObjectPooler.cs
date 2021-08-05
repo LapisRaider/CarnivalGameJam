@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPCObjectPooler
 {
     public GameObject m_NPCPrefab;
-    public GameObject m_Parent;
+    public Transform m_Parent;
     public int m_InitialSpawnAmt;
 
     public Material m_NPCDefaultMaterial;
@@ -20,6 +20,10 @@ public class NPCObjectPooler
                 return;
 
             GameObject npcObj = GameObject.Instantiate(m_NPCPrefab, new Vector3(0.0f, 0, 0), Quaternion.identity);
+
+            if (m_Parent != null)
+                npcObj.transform.parent = m_Parent;
+
             NPC npc = npcObj.GetComponent<NPC>();
             npc.CreateMaterial(m_NPCDefaultMaterial);
             npcObj.SetActive(false);

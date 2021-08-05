@@ -46,8 +46,8 @@ public class PlayerBalloon : MonoBehaviour
                     if (npc == null)
                         return;
 
-                    npc.TakeBalloon(m_CurrentColor); //give balloon to child
-                    ResetBalloon();
+                    if (npc.TakeBalloon(m_CurrentColor)) //give balloon to child
+                        ResetBalloon();
                 }
             }
         }
@@ -105,12 +105,12 @@ public class PlayerBalloon : MonoBehaviour
 
     public void AddBlue()
     {
+        if (m_BlueSpray != null)
+            m_BlueSpray.Play();
+
         //if already true ignore
         if (m_CurrentMix.m_Blue)
             return;
-
-        if (m_BlueSpray != null)
-            m_BlueSpray.Play();
 
         m_CurrentMix.m_Blue = true;
         ChangeBalloonColor();
@@ -118,12 +118,12 @@ public class PlayerBalloon : MonoBehaviour
 
     public void AddRed()
     {
+        if (m_RedSpray != null)
+            m_RedSpray.Play();
+
         //if already true ignore
         if (m_CurrentMix.m_Red)
             return;
-
-        if (m_RedSpray != null)
-            m_RedSpray.Play();
 
         m_CurrentMix.m_Red = true;
         ChangeBalloonColor();
@@ -131,12 +131,12 @@ public class PlayerBalloon : MonoBehaviour
 
     public void AddYellow()
     {
+        if (m_YellowSpray != null)
+            m_YellowSpray.Play();
+
         //if already true ignore
         if (m_CurrentMix.m_Yellow)
             return;
-
-        if (m_YellowSpray != null)
-            m_YellowSpray.Play();
 
         m_CurrentMix.m_Yellow = true;
         ChangeBalloonColor();

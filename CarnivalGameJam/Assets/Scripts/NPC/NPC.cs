@@ -270,10 +270,10 @@ public class NPC : MonoBehaviour
         }
     }
 
-    public void TakeBalloon(ColorVariants colorGiven)
+    public bool TakeBalloon(ColorVariants colorGiven)
     {
         if (!m_IsWaiting)
-            return;
+            return false;
 
         bool customerHappy = colorGiven == m_ColorWanted;
         GameHandler.Instance.UpdateCustomerCounter(customerHappy);
@@ -292,6 +292,7 @@ public class NPC : MonoBehaviour
         }
 
         //TODO:: show the balloon rising up
+        return true;
     }
 
     //walk sadly away

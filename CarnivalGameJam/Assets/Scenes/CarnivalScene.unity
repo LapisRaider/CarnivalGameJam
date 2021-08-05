@@ -3822,7 +3822,7 @@ PrefabInstance:
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3842,7 +3842,7 @@ PrefabInstance:
     - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240070762128, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3976,6 +3976,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: m_NPCManagerData.m_NPCMaxSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: m_QueuePositions.Array.data[0]
       value: 
       objectReference: {fileID: 147803428}
@@ -3994,10 +3999,55 @@ PrefabInstance:
       propertyPath: m_QueuePositions.Array.data[3]
       value: 
       objectReference: {fileID: 614063288}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_MaxSpawnRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_NPCDefaultSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_DefaultSpawnRate
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_MinSpawnInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_NPCMinPatienceTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_NPCMaxRotationSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_DefaultSpawnInterval
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_NPCDefaultPatienceTime
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_NPCManagerData.m_NPCDefaultRotationSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6702618019664023355, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -7351,10 +7401,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: sCORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f0ca55878caaffd4f82394aeefa719aa, type: 2}
+  m_sharedMaterial: {fileID: -9032632215567590919, guid: f0ca55878caaffd4f82394aeefa719aa,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

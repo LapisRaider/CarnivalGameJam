@@ -54,6 +54,7 @@ public class NPCManager : MonoBehaviour
         if (m_SpawnIntervalTracker >= 0.0f)
         {
             m_SpawnIntervalTracker -= Time.deltaTime;
+
         }
         else
         {
@@ -68,13 +69,20 @@ public class NPCManager : MonoBehaviour
                     if (npc != null)
                     {
                         m_WaitingNPCs.Enqueue(npc);
-                        m_SpawnIntervalTracker = m_NPCManagerData.m_CurrSpawnInterval; //reset spawn interval
+                        Debug.Log("SPAWN scuceed");
                     }
                     else
                     {
                         Debug.LogWarning("Something wrong with the waiting position tracker");
                     }
                 }
+                else
+                {
+                    Debug.Log("SPAWN FAILED");
+                }
+
+
+                m_SpawnIntervalTracker = m_NPCManagerData.m_DefaultSpawnInterval; //reset spawn interval
             }
         }
 

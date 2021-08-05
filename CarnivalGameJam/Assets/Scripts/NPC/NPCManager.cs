@@ -116,10 +116,9 @@ public class NPCManager : MonoBehaviour
                 continue;
 
             Vector3 leavePos = m_LeavePos[Random.Range(0, m_LeavePos.Length)].position;
-            Vector3 queuePos = m_QueuePositions[i].position;
 
             npc.InitNPCToQueue(m_NPCManagerData.m_CurrNPCPatienceTime, m_NPCManagerData.m_CurrNPCMoveSpeed,
-                                m_NPCManagerData.m_CurrNPCRotationSpeed, queuePos, leavePos);
+                                m_NPCManagerData.m_CurrNPCRotationSpeed, m_QueuePositions[i], leavePos);
             npc.OnLeftQueueCallback += NPCLeftQueuePos; //set the callback
 
             m_CustomersInQueue[i] = npc;

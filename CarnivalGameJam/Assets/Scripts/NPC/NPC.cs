@@ -37,9 +37,11 @@ public class NPC : MonoBehaviour
     // set by npcManager
     private float m_WalkSpeed = 1.0f;
     private float m_RotationSpeed = 1.0f;
+    private float m_StartTiming = 0.0f;
 
     //for positions
     private Transform m_OriginalTransform;
+    private Transform m_QueueTransform;
     private Vector3 m_NextPos;
     private Vector3 m_LeaveDestination;
 
@@ -49,6 +51,7 @@ public class NPC : MonoBehaviour
         ResetNPCUI();
         m_OriginalTransform = transform;
         m_IsWaiting = false;
+        m_StartTiming = 0.0f;
     }
 
     public void CreateMaterial(Material material)
@@ -126,12 +129,15 @@ public class NPC : MonoBehaviour
         }
     }
 
-    public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Vector3 queuePos, Vector3 leavePos)
+    public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Transform queueTransform, Vector3 leavePos)
     {
         m_PatienceTime = patienceTime;
         m_LeaveDestination = leavePos;
         m_LeaveDestination.y = 0.0f;
-        m_NextPos = queuePos;
+
+        m_QueueTransform = queueTransform;
+
+        m_NextPos = queueTransform.position;
         m_NextPos.y = 0.0f;
 
         m_WalkSpeed = walkSpeed;
@@ -139,6 +145,8 @@ public class NPC : MonoBehaviour
 
         m_OriginalTransform = transform;
         m_IsWaiting = false;
+
+        m_StartTiming = 0.0f;
 
         StartCoroutine(StartQueue());
     }
@@ -166,9 +174,16 @@ public class NPC : MonoBehaviour
             return true;
 
         Quaternion nextRotation = Quaternion.LookRotation(dir, Vector3.up);
-        transform.rotation = Quaternion.Lerp(m_OriginalTransform.rotation, nextRotation, Time.time * m_RotationSpeed);
+        transform.rotation = Quaternion.Lerp(m_OriginalTransform.rotation, nextRotation, (Time.time - m_StartTiming) * m_RotationSpeed);
 
         return Mathf.Abs(Quaternion.Dot(transform.rotation, nextRotation)) >= m_RotationStopThreshold;
+    }
+
+    public bool RotateTowardsRotation()
+    {
+        transform.rotation = Quaternion.Lerp(m_OriginalTransform.rotation, m_QueueTransform.rotation, (Time.time - m_StartTiming) * m_RotationSpeed);
+
+        return Mathf.Abs(Quaternion.Dot(transform.rotation, m_QueueTransform.rotation)) >= m_RotationStopThreshold;
     }
 
     IEnumerator StartQueue()
@@ -176,6 +191,7 @@ public class NPC : MonoBehaviour
         //while havent walk finish to destination
         m_Animator.SetBool("Walking", true);
 
+        m_StartTiming = Time.time;
         while (!WalkToDestination())
         {
             RotateTowardsLocation(); //rotate towards the direction it is walking to
@@ -184,7 +200,9 @@ public class NPC : MonoBehaviour
         }
 
         //reach queue, face the player
-        while (!RotateTowardsLocation())
+        m_OriginalTransform = gameObject.transform;
+        m_StartTiming = Time.time;
+        while (!RotateTowardsRotation())
         {
             yield return null;
         }
@@ -314,7 +332,9 @@ public class NPC : MonoBehaviour
         //set the animation
         m_Animator.SetBool("Walking", true);
 
+        m_OriginalTransform = gameObject.transform;
         m_NextPos = m_LeaveDestination;
+        m_StartTiming = Time.time;
         while (!WalkToDestination())
         {
             RotateTowardsLocation(); //rotate towards the direction it is walking to

@@ -1,0 +1,36 @@
+newmtl model:mat8
+illum 4
+Kd 0.91 0.05 0.03
+Ka 0.96 0.26 0.21
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl model:mat12
+illum 4
+Kd 1.00 0.83 0.04
+Ka 1.00 0.92 0.23
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl model:mat15
+illum 4
+Kd 0.63 0.70 0.72
+Ka 0.81 0.85 0.86
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl model:mat19
+illum 4
+Kd 0.74 0.33 0.06
+Ka 0.87 0.60 0.27
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl model:mat21
+illum 4
+Kd 1.00 1.00 1.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl model:mat23
+illum 4
+Kd 0.01 0.01 0.01
+Ka 0.10 0.10 0.10
+Tf 1.00 1.00 1.00
+Ni 1.00

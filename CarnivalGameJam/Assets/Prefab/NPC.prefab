@@ -446,7 +446,7 @@ Transform:
   m_GameObject: {fileID: 8060074240814750366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 8060074240895990805}
   - {fileID: 8060074239805895740}
@@ -466,8 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: 0
+  animationTest: 0
   m_AllPartsParent: {fileID: 6083610006625463676}
-  m_Test: {fileID: 8060074240884780339}
   m_SpeechBubble: {fileID: 8060074239805895739}
   m_ColorText: {fileID: 8060074239591094359}
   m_ColorDefaultImage: {fileID: 8060074239518672030}

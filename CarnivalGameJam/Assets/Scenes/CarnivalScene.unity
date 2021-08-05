@@ -3821,13 +3821,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: lengthInSec
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5459476225261991471, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3846,13 +3851,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: lengthInSec
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5459476226658125619, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240070762128, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -3947,6 +3957,21 @@ PrefabInstance:
     - target: {fileID: 6525367240256735679, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735680, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_ColorInfoData.Array.data[2].m_ColorInfo.m_Color.b
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735680, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_ColorInfoData.Array.data[2].m_ColorInfo.m_Color.g
+      value: 0.1791877
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735680, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
+      propertyPath: m_ColorInfoData.Array.data[2].m_ColorInfo.m_Color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240256735681, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
@@ -4062,7 +4087,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_NPCMinPatienceTime
-      value: 4.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -4086,13 +4111,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: lengthInSec
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240662959804, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6702618019664023355, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}

@@ -219,12 +219,18 @@ public class NPC : MonoBehaviour
 
         //set the UI to true
         if (m_SpeechBubble != null)
-            m_SpeechBubble.SetActive(false);
+        {
+            m_SpeechBubble.SetActive(true);
+
+            Transform speechBubbleTransform = m_SpeechBubble.transform;
+            speechBubbleTransform.LookAt(Camera.main.transform);
+
+            m_SpeechBubble.transform.rotation = Quaternion.Euler(speechBubbleTransform.rotation.eulerAngles.x,
+                speechBubbleTransform.rotation.eulerAngles.y + 180.0f, speechBubbleTransform.rotation.eulerAngles.z);
+        }
 
         //randomize the color
         m_ColorWanted = (ColorVariants)Random.Range((int)(ColorVariants.RED), (int)(ColorVariants.COLORLESS));
-
-        Debug.Log("Color wanted " + m_ColorWanted);
 
         StroopTestTypes stroopMode = GameHandler.Instance.RandomizeStroopType();
 

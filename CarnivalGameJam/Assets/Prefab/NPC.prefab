@@ -136,7 +136,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8060074239591094356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8060074239869631587}
@@ -144,8 +144,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 769.3273, y: 230.81836}
+  m_AnchoredPosition: {x: 11, y: 100}
+  m_SizeDelta: {x: 827.85364, y: 272.6433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8060074239591094358
 CanvasRenderer:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Purple
+  m_text: Orange
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c61a583724c9c042a20d00332186267, type: 2}
   m_sharedMaterial: {fileID: 5786499778014847354, guid: 2c61a583724c9c042a20d00332186267,
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 238.1
-  m_fontSizeBase: 238.1
+  m_fontSize: 235.24
+  m_fontSizeBase: 235.24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

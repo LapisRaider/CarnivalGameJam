@@ -22,9 +22,16 @@ public class NPC : MonoBehaviour
     [Header("Npc Effects")]
     public Animator m_Animator;
 
+    public float m_MaxShakeAmt = 1.0f;
+    public float m_MaxShakeFrequency = 0.8f;
+    public float m_DefaultShakeFrequency = 0.0f;
+    public float m_StartShakingPercentage = 0.7f;
+    private float m_CurrentShakeProbability = 0.0f;
+
     [Header("Npc Behavior")]
     private bool m_IsWaiting = false;
     private float m_PatienceTime = 0.0f; //in seconds
+    private float m_CurrPatienceTime = 0.0f;
     private ColorVariants m_ColorWanted = ColorVariants.COLORLESS;
 
     public delegate void OnLeavingQueue(NPC npc);
@@ -52,12 +59,6 @@ public class NPC : MonoBehaviour
         m_OriginalTransform = transform;
         m_IsWaiting = false;
         m_StartTiming = 0.0f;
-
-        //if (m_Animator != null)
-        //{
-        //    m_Animator.SetBool("Sad", false);
-        //    m_Animator.SetBool("Walking", false);
-        //}
     }
 
     public void CreateMaterial(Material material)
@@ -110,9 +111,27 @@ public class NPC : MonoBehaviour
         if (!m_IsWaiting)
             return;
 
-        m_PatienceTime -= Time.deltaTime; //reduce the patienceTime
-        //TODO:: UPDATE SOME UI TO SHOW THE TIME LEFT
-        if (m_PatienceTime <= 0.0f)
+        m_CurrPatienceTime -= Time.deltaTime; //reduce the patienceTime
+
+        //to show they are losing patience
+        float patiencePercentage = 1.0f - (m_CurrPatienceTime / m_PatienceTime);
+        if (patiencePercentage > m_StartShakingPercentage)
+        {
+            m_CurrentShakeProbability = (m_MaxShakeFrequency - m_DefaultShakeFrequency) * patiencePercentage;
+
+            float shakeChance = Random.Range(m_DefaultShakeFrequency, m_MaxShakeFrequency);
+
+            if (shakeChance < m_CurrentShakeProbability)
+            {
+                if (m_QueueTransform != null)
+                {
+                    Vector3 shakePos = new Vector3(m_QueueTransform.position.x + Random.Range(-m_MaxShakeAmt, m_MaxShakeAmt), m_QueueTransform.position.y, m_QueueTransform.position.z + Random.Range(-m_MaxShakeAmt, m_MaxShakeAmt));
+                    transform.position = shakePos;
+                }
+            }
+        }
+
+        if (m_CurrPatienceTime <= 0.0f)
         {
             Sad(); //Leave and sad
         }
@@ -142,6 +161,7 @@ public class NPC : MonoBehaviour
     public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Transform queueTransform, Vector3 leavePos)
     {
         m_PatienceTime = patienceTime;
+        m_CurrPatienceTime = patienceTime;
         m_LeaveDestination = leavePos;
         m_LeaveDestination.y = 0.0f;
 

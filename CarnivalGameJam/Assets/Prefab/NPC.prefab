@@ -486,8 +486,12 @@ MonoBehaviour:
   m_ColorText: {fileID: 8060074239591094359}
   m_ColorDefaultImage: {fileID: 8060074239518672030}
   m_Animator: {fileID: 8060074240889017333}
+  m_MaxShakeAmt: 0.025
+  m_MaxShakeFrequency: 0.9
+  m_DefaultShakeFrequency: 0
+  m_StartShakingPercentage: 0.55
   m_StopThreshold: 0.1
-  m_RotationStopThreshold: 0.96
+  m_RotationStopThreshold: 0.98
 --- !u!65 &8060074240814750337
 BoxCollider:
   m_ObjectHideFlags: 0

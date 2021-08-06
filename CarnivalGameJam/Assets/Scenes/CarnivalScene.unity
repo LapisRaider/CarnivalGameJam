@@ -7159,7 +7159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UpOffset: 40
-  m_InterpolationTime: 120
+  m_InterpolationTime: 150
 --- !u!114 &1758300228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7555,7 +7555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UpOffset: 40
-  m_InterpolationTime: 120
+  m_InterpolationTime: 150
 --- !u!114 &1821246420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8132,7 +8132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UpOffset: 40
-  m_InterpolationTime: 120
+  m_InterpolationTime: 150
 --- !u!114 &1916714972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8320,7 +8320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UpOffset: 20
-  m_InterpolationTime: 120
+  m_InterpolationTime: 150
 --- !u!114 &1938191925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8795,7 +8795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UpOffset: 20
-  m_InterpolationTime: 120
+  m_InterpolationTime: 150
 --- !u!114 &2099002653
 MonoBehaviour:
   m_ObjectHideFlags: 0

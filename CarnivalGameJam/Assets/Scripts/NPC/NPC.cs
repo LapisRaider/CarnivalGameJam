@@ -52,6 +52,12 @@ public class NPC : MonoBehaviour
         m_OriginalTransform = transform;
         m_IsWaiting = false;
         m_StartTiming = 0.0f;
+
+        //if (m_Animator != null)
+        //{
+        //    m_Animator.SetBool("Sad", false);
+        //    m_Animator.SetBool("Walking", false);
+        //}
     }
 
     public void CreateMaterial(Material material)
@@ -114,7 +120,11 @@ public class NPC : MonoBehaviour
 
     public void StartNPCAppear(GameObject prop = null, Texture texture = null)
     {
-        m_Animator.SetBool("Walking", false);
+        if (m_Animator != null)
+        {
+            m_Animator.SetBool("Sad", false);
+            m_Animator.SetBool("Walking", false);
+        }
 
         if (texture != null)
         {
@@ -316,6 +326,9 @@ public class NPC : MonoBehaviour
         //decrease happiness level or counter or whatever
         //make sure to rotate towards the direction
         //put a sad emjoi
+        if (m_Animator != null)
+            m_Animator.SetBool("Sad", true);
+
         GameHandler.Instance.UpdateCustomerCounter(false);
 
 

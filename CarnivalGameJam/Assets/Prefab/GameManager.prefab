@@ -5119,7 +5119,7 @@ MonoBehaviour:
   - m_Name: Yellow
     m_ColorEnumType: 1
     m_ColorInfo:
-      m_Color: {r: 1, g: 0.9214484, b: 0, a: 1}
+      m_Color: {r: 1, g: 0.9371402, b: 0.1273585, a: 1}
       m_ColorName: Yellow
       m_ColorToMix:
         m_Red: 0
@@ -5155,7 +5155,7 @@ MonoBehaviour:
   - m_Name: Green
     m_ColorEnumType: 5
     m_ColorInfo:
-      m_Color: {r: 0, g: 1, b: 0.071077585, a: 1}
+      m_Color: {r: 0, g: 0.7735849, b: 0.054606084, a: 1}
       m_ColorName: Green
       m_ColorToMix:
         m_Red: 0
@@ -5206,6 +5206,8 @@ MonoBehaviour:
   m_MaxDifficultyIncrease: 3
   m_AddDifficultyCustomerInterval: 1
   m_MaxDifficultyInterval: 20
+  m_FailedCustomerBuffer: 5
+  m_FailurePercentage: 0.2
   m_StroopTest:
     m_DefaultTextChance: 10
     m_DefaultColorChance: 10

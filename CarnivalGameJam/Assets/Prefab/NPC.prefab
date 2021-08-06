@@ -486,8 +486,8 @@ MonoBehaviour:
   m_ColorText: {fileID: 8060074239591094359}
   m_ColorDefaultImage: {fileID: 8060074239518672030}
   m_Animator: {fileID: 8060074240889017333}
-  m_StopThreshold: 0.2
-  m_RotationStopThreshold: 0.98
+  m_StopThreshold: 0.1
+  m_RotationStopThreshold: 0.96
 --- !u!65 &8060074240814750337
 BoxCollider:
   m_ObjectHideFlags: 0

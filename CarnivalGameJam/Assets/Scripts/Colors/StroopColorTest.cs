@@ -33,9 +33,6 @@ public class StroopColorTest
         int totalChance = m_DefaultColorChance + m_DefaultTextChance + m_SameColorChance + m_CurrDiffTextColorChance;
         int randomized = Random.Range(0, totalChance);
 
-        Debug.Log("RANDOMIZED NUMBER " + randomized);
-        Debug.Log("total NUMBER " + totalChance);
-
         if (randomized < m_DefaultTextChance) //default text
         {
             return StroopTestTypes.DEFAULT_TEXT;

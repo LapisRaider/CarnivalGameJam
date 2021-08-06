@@ -293,18 +293,14 @@ public class NPC : MonoBehaviour
             return false;
 
         bool customerHappy = colorGiven == m_ColorWanted;
-        GameHandler.Instance.UpdateCustomerCounter(customerHappy);
-
+        
         if (customerHappy)
         {
             //TODO:: update UI accordingly
-
-            Debug.Log(m_ColorWanted);
             Happy();
         }
         else
         {
-            Debug.Log("WRONG");
             Sad();
         }
 
@@ -320,6 +316,8 @@ public class NPC : MonoBehaviour
         //decrease happiness level or counter or whatever
         //make sure to rotate towards the direction
         //put a sad emjoi
+        GameHandler.Instance.UpdateCustomerCounter(false);
+
 
         Leave();
     }
@@ -330,6 +328,7 @@ public class NPC : MonoBehaviour
         //the NPC walks away happy
         //play some happy effects
         //add to happiness levels i guess
+        GameHandler.Instance.UpdateCustomerCounter(true);
 
         Leave();
     }

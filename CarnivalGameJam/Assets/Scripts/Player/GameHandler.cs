@@ -7,6 +7,8 @@ public class GameHandler : SingletonBase<GameHandler>
 {
     [Header("Game UI")]
     public TextMeshProUGUI m_HighScoreText;
+    public HappinessMeter m_HappinessMeter = new HappinessMeter();
+
 
     //difficulty is determined by the number of customers successfully served
     //formula is = m_MaxDifficultyIncrease * ((curr customer / m_AddDifficultyCustomerInterval) / m_MaxDifficultyCustomer)
@@ -15,6 +17,10 @@ public class GameHandler : SingletonBase<GameHandler>
     public int m_AddDifficultyCustomerInterval = 1; // For x number of customer difficulty will increase
     public int m_MaxDifficultyInterval = 20;
     private float m_CurrModifierValue = 1.0f;
+
+    [Header("Lose Conditions")]
+    public int m_FailedCustomerBuffer = 5; //after reaching below the threshold, a small buffer
+    public float m_FailurePercentage = 0.2f;
 
     [Header("Stroop Handler")]
     public StroopColorTest m_StroopTest = new StroopColorTest();
@@ -43,6 +49,8 @@ public class GameHandler : SingletonBase<GameHandler>
         m_CurrModifierValue = 1.0f;
 
         ModifierUpdatedCallback += m_StroopTest.StroopModifierUpdate;
+
+        m_HappinessMeter.Init();
     }
 
     public void UpdateCustomerCounter(bool customerHappy)
@@ -83,14 +91,26 @@ public class GameHandler : SingletonBase<GameHandler>
 
     public void UpdateHappinessLevels()
     {
-        //TODO:: update happiness UI here and check if below threshold
+        int maxFailures = (int)((float)m_TotalCustomersQueued * m_FailurePercentage) + m_FailedCustomerBuffer;
+        int numberOfFailures = m_TotalCustomersQueued - m_TotalCustomersHappy;
 
+        Debug.Log("Failures " + numberOfFailures);
+        Debug.Log("Max Failures " + maxFailures);
+
+        float successRate = 1.0f - ((float)numberOfFailures / (float)maxFailures);
+        m_HappinessMeter.UpdateHappinessMeter(successRate); //update UI
+
+        if (numberOfFailures >= maxFailures)
+        {
+            LoseGame();
+        }
     }
 
     void LoseGame()
     {
         //when unhapiness level reach a certain threshold
         //stop game and show gameover screen, or just transition to gameover screen
+        Debug.Log("LOSE BITCHES LOSE");
     }
 
     //functions belonging to the stroop color test

@@ -44,6 +44,7 @@ public class NPC : MonoBehaviour
     [Header("Npc Movement")]
     public float m_StopThreshold = 1.0f; //threshold to stop
     public float m_RotationStopThreshold = 0.98f;
+    private BoxCollider m_BoxCollider;
 
     // set by npcManager
     private float m_WalkSpeed = 1.0f;
@@ -63,6 +64,8 @@ public class NPC : MonoBehaviour
         m_OriginalTransform = transform;
         m_IsWaiting = false;
         m_StartTiming = 0.0f;
+
+        m_BoxCollider = GetComponent<BoxCollider>();
     }
 
     public void CreateMaterial(Material material, Material balloonMaterial)
@@ -165,6 +168,9 @@ public class NPC : MonoBehaviour
 
         if (m_BalloonObj != null)
             m_BalloonObj.SetActive(false);
+
+        if (m_BoxCollider != null)
+            m_BoxCollider.enabled = false;
     }
 
     public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Transform queueTransform, Vector3 leavePos)
@@ -245,6 +251,9 @@ public class NPC : MonoBehaviour
         {
             yield return null;
         }
+
+        if (m_BoxCollider != null)
+            m_BoxCollider.enabled = true;
 
         m_Animator.SetBool("Walking", false);
         AskForBalloon();
@@ -343,7 +352,6 @@ public class NPC : MonoBehaviour
             Sad();
         }
 
-        //TODO:: show the balloon rising up
         return true;
     }
 
@@ -392,6 +400,9 @@ public class NPC : MonoBehaviour
 
     IEnumerator StartLeaving()
     {
+        if (m_BoxCollider != null)
+            m_BoxCollider.enabled = false;
+
         //set the animation
         m_Animator.SetBool("Walking", true);
 

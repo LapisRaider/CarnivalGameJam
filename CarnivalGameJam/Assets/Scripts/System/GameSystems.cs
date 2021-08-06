@@ -41,7 +41,7 @@ public class GameSystems : MonoBehaviour
 
     public void TransitionScene(string sceneName)
     {
-
+        SceneManager.LoadScene(sceneName);
     }
 
     public void SetPause(bool pause)

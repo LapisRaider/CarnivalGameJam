@@ -13,7 +13,6 @@ public class DifficultyMeter
             return;
 
         m_DifficultyMeterRect.anchoredPosition = new Vector2(m_StartPosX, m_DifficultyMeterRect.anchoredPosition.y);
-        Debug.Log(m_DifficultyMeterRect.position);
     }
 
     public void UpdateDifficultyMeter(float difficultyMultiplier)

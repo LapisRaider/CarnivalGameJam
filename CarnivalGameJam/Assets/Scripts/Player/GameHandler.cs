@@ -76,7 +76,6 @@ public class GameHandler : SingletonBase<GameHandler>
             if (ModifierUpdatedCallback != null)
                 ModifierUpdatedCallback.Invoke(m_CurrModifierValue); //invoke the deletgate
 
-            Debug.Log("DIFFICULTY" + difficultyPercentage);
             m_DifficultyMeter.UpdateDifficultyMeter(difficultyPercentage);
 
             UpdateAndAddHighScore();

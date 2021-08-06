@@ -73,6 +73,18 @@ public class NPC : MonoBehaviour
         StopAllCoroutines();
     }
 
+    public void OnMouseOver()
+    {
+        if (m_Animator)
+            m_Animator.SetBool("Hovering", true);
+    }
+
+    public void OnMouseExit()
+    {
+        if (m_Animator)
+            m_Animator.SetBool("Hovering", false);
+    }
+
     public void CreateMaterial(Material material, Material balloonMaterial)
     {
         m_Material = new Material(material);

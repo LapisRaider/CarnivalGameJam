@@ -6639,7 +6639,7 @@ Camera:
   field of view: 51.8
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 23
@@ -10158,7 +10158,7 @@ GameObject:
   - component: {fileID: 1899008178}
   m_Layer: 0
   m_Name: NoPostProcessCamera
-  m_TagString: Untagged
+  m_TagString: OtherCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10222,7 +10222,7 @@ Camera:
   field of view: 51.8
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 288

@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 6525367240108293424}
   - component: {fileID: 6525367240108293425}
   - component: {fileID: 6525367240108293426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Burst Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5209,6 +5209,7 @@ MonoBehaviour:
   m_StroopTest:
     m_DefaultTextChance: 10
     m_DefaultColorChance: 10
+    m_SameColorChance: 33
     m_DefaultDiffTextColorChance: 8
     m_MaxDiffTextColorChance: 70
     m_StroopDefaultColor: {r: 0, g: 0, b: 0, a: 1}
@@ -5348,6 +5349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedSpray
       objectReference: {fileID: 0}
+    - target: {fileID: 1246712446931526354, guid: 5c316761d8340894c8da2be3eadb16bc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1246712446931526359, guid: 5c316761d8340894c8da2be3eadb16bc,
         type: 3}
       propertyPath: m_RootOrder
@@ -5463,6 +5469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BluePaint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246712446931526354, guid: 5c316761d8340894c8da2be3eadb16bc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1246712446931526359, guid: 5c316761d8340894c8da2be3eadb16bc,
         type: 3}
@@ -5699,6 +5710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreenSpray
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246712446931526354, guid: 5c316761d8340894c8da2be3eadb16bc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1246712446931526359, guid: 5c316761d8340894c8da2be3eadb16bc,
         type: 3}

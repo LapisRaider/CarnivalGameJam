@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: d8fa6feaabb215e42ad4d5f8d6e363d7
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3092bfe28d6f6084e93cc6606bc115cc
+  - enabled: 1
     path: Assets/Scenes/CarnivalScene.unity
     guid: 7f3f25c4233abf04cacc8ff539f6267e
   m_configObjects: {}

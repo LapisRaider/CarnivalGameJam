@@ -5102,6 +5102,11 @@ PrefabInstance:
       objectReference: {fileID: 1174520363}
     - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: m_LoseScene.m_HighScoreText
+      value: 
+      objectReference: {fileID: 1485118388}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: m_DifficultyMeter.m_FinalPosX
       value: -239.8
       objectReference: {fileID: 0}

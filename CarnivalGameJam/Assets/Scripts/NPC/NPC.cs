@@ -28,6 +28,10 @@ public class NPC : MonoBehaviour
     public float m_StartShakingPercentage = 0.7f;
     private float m_CurrentShakeProbability = 0.0f;
 
+    public GameObject m_BalloonObj;
+    public MeshRenderer m_BalloonRenderer;
+    private Material m_BalloonMaterial;
+
     [Header("Npc Behavior")]
     private bool m_IsWaiting = false;
     private float m_PatienceTime = 0.0f; //in seconds
@@ -61,7 +65,7 @@ public class NPC : MonoBehaviour
         m_StartTiming = 0.0f;
     }
 
-    public void CreateMaterial(Material material)
+    public void CreateMaterial(Material material, Material balloonMaterial)
     {
         m_Material = new Material(material);
 
@@ -74,7 +78,11 @@ public class NPC : MonoBehaviour
             meshRenderer.material = m_Material;
         }
 
-        //TODO:: should have some sort of spawning animation, like phase in kind
+        m_BalloonMaterial = new Material(balloonMaterial);
+        if (m_BalloonRenderer != null)
+        {
+            m_BalloonRenderer.material = m_BalloonMaterial;
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -148,14 +156,15 @@ public class NPC : MonoBehaviour
         if (texture != null)
         {
             m_Material.mainTexture = texture;
-
-            //TODO:: set the texture value here to 0.0f for the alpha, fade it in
         }
 
         if (prop != null)
         {
             //TODO:: attach prop to hand
         }
+
+        if (m_BalloonObj != null)
+            m_BalloonObj.SetActive(false);
     }
 
     public void InitNPCToQueue(float patienceTime, float walkSpeed, float rotationSpeed, Transform queueTransform, Vector3 leavePos)
@@ -355,12 +364,15 @@ public class NPC : MonoBehaviour
         Leave();
     }
 
-    //walk happ
+    //walk away happy
     public void Happy()
     {
-        //the NPC walks away happy
-        //play some happy effects
-        //add to happiness levels i guess
+        if (m_BalloonObj != null)
+            m_BalloonObj.SetActive(true);
+
+        if (m_BalloonMaterial != null)
+            m_BalloonMaterial.color = ColorData.Instance.GetColor(m_ColorWanted);
+
         GameHandler.Instance.UpdateCustomerCounter(true);
 
         Leave();

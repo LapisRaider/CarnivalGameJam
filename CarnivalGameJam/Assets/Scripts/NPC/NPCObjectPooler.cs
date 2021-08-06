@@ -9,6 +9,7 @@ public class NPCObjectPooler
     public int m_InitialSpawnAmt;
 
     public Material m_NPCDefaultMaterial;
+    public Material m_BalloonMaterial;
 
     List<NPC> m_NPCList = new List<NPC>();
 
@@ -25,7 +26,7 @@ public class NPCObjectPooler
                 npcObj.transform.parent = m_Parent;
 
             NPC npc = npcObj.GetComponent<NPC>();
-            npc.CreateMaterial(m_NPCDefaultMaterial);
+            npc.CreateMaterial(m_NPCDefaultMaterial, m_BalloonMaterial);
             npcObj.SetActive(false);
 
             m_NPCList.Add(npc);

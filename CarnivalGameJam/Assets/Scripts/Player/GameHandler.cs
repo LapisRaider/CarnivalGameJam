@@ -7,8 +7,8 @@ public class GameHandler : SingletonBase<GameHandler>
 {
     [Header("Game UI")]
     public TextMeshProUGUI m_HighScoreText;
+    public int m_HighScoreCharacters = 6;
     public HappinessMeter m_HappinessMeter = new HappinessMeter();
-
 
     //difficulty is determined by the number of customers successfully served
     //formula is = m_MaxDifficultyIncrease * ((curr customer / m_AddDifficultyCustomerInterval) / m_MaxDifficultyCustomer)
@@ -29,6 +29,7 @@ public class GameHandler : SingletonBase<GameHandler>
     public int m_DefaultScoreAdded = 20;
     public int m_MaxScoreAdded = 40;
     private int m_CurrHighScore = 0;
+    private int m_UIHighScore = 0;
 
     //checked how many of them were happy/unhappy
     private int m_TotalCustomersQueued = 0;
@@ -84,9 +85,44 @@ public class GameHandler : SingletonBase<GameHandler>
 
         if (m_HighScoreText == null)
             return;
+    }
 
-        //TODO:: maybe can lerp the text and do a + add score thing
-        m_HighScoreText.SetText(m_CurrHighScore.ToString());
+    public void Update()
+    {   
+        if (m_UIHighScore < m_CurrHighScore)
+        {
+            m_UIHighScore += 1;
+            string highScoreText = m_UIHighScore.ToString();
+            string highScoreTextPadding = "";
+
+            if (highScoreText.Length < m_HighScoreCharacters)
+            {
+                int charactersToPad = m_HighScoreCharacters - highScoreText.Length;
+
+                for (int i = 0; i < charactersToPad; ++i)
+                {
+                    highScoreTextPadding += "0";
+                }
+            }
+            else if (highScoreText.Length > m_HighScoreCharacters)
+            {
+                //if players are insane enough to get more than the limit
+                for (int i = 0; i < m_HighScoreCharacters; ++i)
+                {
+                    highScoreTextPadding += "X";
+                }
+
+                highScoreText = "";
+            }
+
+            if (m_HighScoreText != null)
+                m_HighScoreText.SetText(highScoreTextPadding + highScoreText);
+        }
+        else if (m_UIHighScore > m_CurrHighScore) //a just in case, but this should never happen
+        {
+            m_UIHighScore = m_CurrHighScore;
+        }
+
     }
 
     public void UpdateHappinessLevels()

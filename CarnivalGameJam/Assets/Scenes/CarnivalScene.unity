@@ -5861,6 +5861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ObjectsToBeInactive:
   - {fileID: 951094166}
+  - {fileID: 1899008177}
   m_PauseMenu: {fileID: 56706543}
 --- !u!4 &797669078
 Transform:

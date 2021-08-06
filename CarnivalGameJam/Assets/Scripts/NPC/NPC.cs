@@ -68,6 +68,11 @@ public class NPC : MonoBehaviour
         m_BoxCollider = GetComponent<BoxCollider>();
     }
 
+    public void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     public void CreateMaterial(Material material, Material balloonMaterial)
     {
         m_Material = new Material(material);
@@ -344,7 +349,6 @@ public class NPC : MonoBehaviour
         
         if (customerHappy)
         {
-            //TODO:: update UI accordingly
             Happy();
         }
         else
@@ -358,16 +362,10 @@ public class NPC : MonoBehaviour
     //walk sadly away
     public void Sad()
     {
-        //NPC not happy, cry BITCH
-        //play some sad effects
-        //decrease happiness level or counter or whatever
-        //make sure to rotate towards the direction
-        //put a sad emjoi
         if (m_Animator != null)
             m_Animator.SetBool("Sad", true);
 
         GameHandler.Instance.UpdateCustomerCounter(false);
-
 
         Leave();
     }
@@ -395,7 +393,8 @@ public class NPC : MonoBehaviour
         if (OnLeftQueueCallback != null)
             OnLeftQueueCallback.Invoke(this);
 
-        StartCoroutine(StartLeaving());
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(StartLeaving());
     }
 
     IEnumerator StartLeaving()

@@ -9,6 +9,7 @@ public class GameHandler : SingletonBase<GameHandler>
     public TextMeshProUGUI m_HighScoreText;
     public int m_HighScoreCharacters = 6;
     public HappinessMeter m_HappinessMeter = new HappinessMeter();
+    public DifficultyMeter m_DifficultyMeter = new DifficultyMeter();
 
     //difficulty is determined by the number of customers successfully served
     //formula is = m_MaxDifficultyIncrease * ((curr customer / m_AddDifficultyCustomerInterval) / m_MaxDifficultyCustomer)
@@ -54,6 +55,7 @@ public class GameHandler : SingletonBase<GameHandler>
         ModifierUpdatedCallback += m_StroopTest.StroopModifierUpdate;
 
         m_HappinessMeter.Init();
+        m_DifficultyMeter.Init();
 
         m_Lose = false;
     }
@@ -68,12 +70,14 @@ public class GameHandler : SingletonBase<GameHandler>
 
             //update difficulty modifier
             int difficultyInterval = (int)((float)m_TotalCustomersHappy / (float)m_AddDifficultyCustomerInterval);
-            m_CurrModifierValue = 1.0f + ((float)difficultyInterval / (float)m_MaxDifficultyInterval) * m_MaxDifficultyIncrease;
+            float difficultyPercentage = (float)difficultyInterval / (float)m_MaxDifficultyInterval;
+            m_CurrModifierValue = 1.0f + difficultyPercentage * m_MaxDifficultyIncrease;
 
             if (ModifierUpdatedCallback != null)
                 ModifierUpdatedCallback.Invoke(m_CurrModifierValue); //invoke the deletgate
 
-            //TODO:: IF GOT TIME, DO A DIFFICULTY UI
+            Debug.Log("DIFFICULTY" + difficultyPercentage);
+            m_DifficultyMeter.UpdateDifficultyMeter(difficultyPercentage);
 
             UpdateAndAddHighScore();
         }
@@ -133,9 +137,6 @@ public class GameHandler : SingletonBase<GameHandler>
     {
         int maxFailures = (int)((float)m_TotalCustomersQueued * m_FailurePercentage) + m_FailedCustomerBuffer;
         int numberOfFailures = m_TotalCustomersQueued - m_TotalCustomersHappy;
-
-        Debug.Log("Failures " + numberOfFailures);
-        Debug.Log("Max Failures " + maxFailures);
 
         float successRate = 1.0f - ((float)numberOfFailures / (float)maxFailures);
         m_HappinessMeter.UpdateHappinessMeter(successRate); //update UI

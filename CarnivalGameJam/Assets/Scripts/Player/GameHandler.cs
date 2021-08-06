@@ -21,6 +21,7 @@ public class GameHandler : SingletonBase<GameHandler>
     [Header("Lose Conditions")]
     public int m_FailedCustomerBuffer = 5; //after reaching below the threshold, a small buffer
     public float m_FailurePercentage = 0.2f;
+    public LoseScene m_LoseScene = new LoseScene();
 
     [Header("Stroop Handler")]
     public StroopColorTest m_StroopTest = new StroopColorTest();
@@ -142,11 +143,10 @@ public class GameHandler : SingletonBase<GameHandler>
         }
     }
 
+    //when unhapiness level reach a certain threshold
     void LoseGame()
     {
-        //when unhapiness level reach a certain threshold
-        //stop game and show gameover screen, or just transition to gameover screen
-        Debug.Log("LOSE BITCHES LOSE");
+        m_LoseScene.SetUpLose(m_CurrHighScore);
     }
 
     //functions belonging to the stroop color test

@@ -22,6 +22,7 @@ public class GameHandler : SingletonBase<GameHandler>
     public int m_FailedCustomerBuffer = 5; //after reaching below the threshold, a small buffer
     public float m_FailurePercentage = 0.2f;
     public LoseScene m_LoseScene = new LoseScene();
+    [HideInInspector] public bool m_Lose = false;
 
     [Header("Stroop Handler")]
     public StroopColorTest m_StroopTest = new StroopColorTest();
@@ -53,6 +54,8 @@ public class GameHandler : SingletonBase<GameHandler>
         ModifierUpdatedCallback += m_StroopTest.StroopModifierUpdate;
 
         m_HappinessMeter.Init();
+
+        m_Lose = false;
     }
 
     public void UpdateCustomerCounter(bool customerHappy)
@@ -146,6 +149,7 @@ public class GameHandler : SingletonBase<GameHandler>
     //when unhapiness level reach a certain threshold
     void LoseGame()
     {
+        m_Lose = true;
         m_LoseScene.SetUpLose(m_CurrHighScore);
     }
 

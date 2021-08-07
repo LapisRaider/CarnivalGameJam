@@ -1,8 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Cutscene : MonoBehaviour
 {
+    [Header("Transitions")]
+    public Animator m_TransitionAnimation;
+    public float m_TransitionTime = 1.0f;
+    public GameObject m_CutSceneObj;
+    public GameObject m_InstructionObj;
+
     [Header("Cutscene UI")]
     public TextMeshProUGUI m_Dialogue;
     public Material m_BossMaterial;
@@ -18,7 +26,6 @@ public class Cutscene : MonoBehaviour
     private string m_CurrTextPrinted = "";
     private int m_CurrentDialogueIndex = 0;
     private int m_CurrentTextLength = 0;
-    private bool m_DialogueFinish = false;
     
     public void Start()
     {
@@ -28,7 +35,6 @@ public class Cutscene : MonoBehaviour
         m_CurrentDialogueIndex = 0;
         m_CurrentTextLength = 0;
         m_CurrTextPrinted = "";
-        m_DialogueFinish = false;
         m_CurrentTimeTracker = 0.0f;
 
         UpdateMaterials();
@@ -95,7 +101,11 @@ public class Cutscene : MonoBehaviour
             //check if finish dialogue
             if (m_CurrentDialogueIndex >= m_CutsceneDialogue.Length - 1)
             {
-                m_DialogueFinish = true;
+                if (m_CutSceneObj != null)
+                    m_CutSceneObj.SetActive(false);
+
+                if (m_InstructionObj != null)
+                    m_InstructionObj.SetActive(true);
             }
             else
             {
@@ -104,6 +114,21 @@ public class Cutscene : MonoBehaviour
                 UpdateMaterials(); //change material of boss and player here
             }         
         }
+    }
+
+    public void TransitionScene(string sceneName)
+    {
+        if (m_TransitionAnimation != null)
+            m_TransitionAnimation.SetTrigger("FadeOut");
+
+        StartCoroutine(TransitionNextScene(sceneName));
+    }
+
+    IEnumerator TransitionNextScene(string sceneName)
+    {
+        yield return new WaitForSeconds(m_TransitionTime);
+
+        SceneManager.LoadScene(sceneName);
     }
 }
 

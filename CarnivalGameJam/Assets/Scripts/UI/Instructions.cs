@@ -41,7 +41,7 @@ public class Instructions : MonoBehaviour
             m_RightButton.interactable = true;
 
         
-        string pageNumber = m_CurrPageNo + "/" + m_Instructions.Length.ToString();
+        string pageNumber = (m_CurrPageNo + 1) + "/" + m_Instructions.Length.ToString();
         if (m_PageNumber != null)
             m_PageNumber.text = pageNumber;
     }

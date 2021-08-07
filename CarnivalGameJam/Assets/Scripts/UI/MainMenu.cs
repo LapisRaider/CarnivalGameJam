@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject m_QuitButton;
+    public Animator m_TransitionAnimation;
+    public float m_TransitionTime = 1.0f;
 
     public void Start()
     {
@@ -22,6 +25,16 @@ public class MainMenu : MonoBehaviour
 
     public void TransitionScene(string sceneName)
     {
+        if (m_TransitionAnimation != null)
+            m_TransitionAnimation.SetTrigger("FadeOut");
+
+        StartCoroutine(TransitionNextScene(sceneName));
+    }
+
+    IEnumerator TransitionNextScene(string sceneName)
+    {
+        yield return new WaitForSeconds(m_TransitionTime);
+
         SceneManager.LoadScene(sceneName);
     }
 }

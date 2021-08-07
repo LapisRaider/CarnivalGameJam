@@ -4401,7 +4401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &480396376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6215,6 +6215,34 @@ MonoBehaviour:
     m_Source: {fileID: 0}
   - m_Name: BalloonInflate
     m_Clip: {fileID: 8300000, guid: 61758a1b609f15a47a56321f7d8274e8, type: 3}
+    m_Volume: 1
+    m_Pitch: 1
+    m_HearingBaseOnDist: 0
+    m_Loop: 0
+    m_Source: {fileID: 0}
+  - m_Name: NPCWrong
+    m_Clip: {fileID: 8300000, guid: 6a345bcc1abaa624384ce6eb20f57f24, type: 3}
+    m_Volume: 1
+    m_Pitch: 1
+    m_HearingBaseOnDist: 0
+    m_Loop: 0
+    m_Source: {fileID: 0}
+  - m_Name: NPCHappy
+    m_Clip: {fileID: 8300000, guid: 293d563cb44b54240aabcea3b0bb3aab, type: 3}
+    m_Volume: 1
+    m_Pitch: 1
+    m_HearingBaseOnDist: 0
+    m_Loop: 0
+    m_Source: {fileID: 0}
+  - m_Name: NPCLeave
+    m_Clip: {fileID: 8300000, guid: 8493de0d97b5f784a980ee9f845660cb, type: 3}
+    m_Volume: 0.5
+    m_Pitch: 1
+    m_HearingBaseOnDist: 0
+    m_Loop: 0
+    m_Source: {fileID: 0}
+  - m_Name: NPCArrive
+    m_Clip: {fileID: 8300000, guid: 5b319a108d0825f41ab098fa30a1c96b, type: 3}
     m_Volume: 1
     m_Pitch: 1
     m_HearingBaseOnDist: 0

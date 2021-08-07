@@ -7,9 +7,6 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
-    public bool test;
-    public bool animationTest;
-
     [Header("NPC Texture")]
     private Material m_Material;
     public Transform m_AllPartsParent;
@@ -22,6 +19,7 @@ public class NPC : MonoBehaviour
     [Header("Npc Effects")]
     public Animator m_Animator;
     public Transform m_PropParentTransform;
+    public AudioSource m_AudioSource;
 
     public float m_MaxShakeAmt = 1.0f;
     public float m_MaxShakeFrequency = 0.8f;
@@ -129,14 +127,6 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (test)
-        {
-            //AskForBalloon();
-            StartCoroutine(StartQueue());
-
-            test = false;            
-        }
-
         if (!m_IsWaiting)
             return;
 
@@ -162,6 +152,7 @@ public class NPC : MonoBehaviour
 
         if (m_CurrPatienceTime <= 0.0f)
         {
+            NPCPlaySound("NPCLeave");
             Sad(); //Leave and sad
         }
     }
@@ -360,6 +351,8 @@ public class NPC : MonoBehaviour
             default:
                 break;
         }
+
+        NPCPlaySound("NPCArrive");
     }
 
     public bool TakeBalloon(ColorVariants colorGiven)
@@ -375,6 +368,7 @@ public class NPC : MonoBehaviour
         }
         else
         {
+            NPCPlaySound("NPCWrong");
             Sad();
         }
 
@@ -403,6 +397,8 @@ public class NPC : MonoBehaviour
 
         GameHandler.Instance.UpdateCustomerCounter(true);
 
+        NPCPlaySound("NPCHappy");
+
         Leave();
     }
 
@@ -417,6 +413,14 @@ public class NPC : MonoBehaviour
 
         if (gameObject.activeInHierarchy)
             StartCoroutine(StartLeaving());
+    }
+
+    public void NPCPlaySound(string sound)
+    {
+        if (m_AudioSource == null)
+            return;
+
+        SoundManager.Instance.Play(sound, m_AudioSource);
     }
 
     IEnumerator StartLeaving()

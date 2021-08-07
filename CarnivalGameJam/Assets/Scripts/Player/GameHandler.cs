@@ -150,6 +150,9 @@ public class GameHandler : SingletonBase<GameHandler>
     void LoseGame()
     {
         m_Lose = true;
+        SoundManager.Instance.Stop("BGM");
+        SoundManager.Instance.Play("NPCWrong");
+        SoundManager.Instance.Play("BackgroundNoise");
         m_LoseScene.SetUpLose(m_CurrHighScore);
     }
 

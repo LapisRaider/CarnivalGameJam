@@ -50,6 +50,7 @@ public class SoundManager : SingletonBase<SoundManager>
         if (source != null)
         {
             source.clip = playingSound.m_Clip;
+            source.volume = playingSound.m_Volume;
             source.Play();
         }
     }

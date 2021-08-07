@@ -1,0 +1,54 @@
+Credits:
+
+3D models:
+Scuba tank by Steren Giannini [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/4GhtCNARi8c)
+
+Ferris wheel by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/cvRs_bHUF59)
+
+Big Top by Ian MacGillivray [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/0TmXixFN81A)
+
+Bear by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/0PXWfxfb0Hu)
+
+Toy train by Jair Trejo [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/2jFwyCzAAaP)
+
+Chicken: https://assetstore.unity.com/packages/3d/characters/animals/meshtint-free-chicken-mega-toon-series-151842
+
+NPCs: https://kenney.nl/assets/blocky-characters
+
+Environment and human models: https://syntystore.com/products/polygon-city-pack?_pos=1&_sid=52c1794e9&_ss=r (PolygonCity)
+
+https://syntystore.com/products/polygon-adventure-pack?_pos=1&_sid=0f70c71a4&_ss=r (PolygonAdventure)
+
+
+2D art assets:
+
+PushPin: https://www.cleanpng.com/png-computer-icons-drawing-pin-symbol-clip-art-pushpin-876671/download-png.html
+
+Surprise speech bubble: https://illustoon.com/?id=1957
+
+Home icon: Icons made by ("https://www.flaticon.com/authors/dave-gandy") Dave Gandy from www.flaticon.com
+
+Balloon Icon: Icons made by ("https://www.flaticon.com/authors/vectors-market") Vectors Market from www.flaticon.com 
+
+
+Fonts:
+Buffalo Circus is licensed by CC BY 3.0. Font Made from oNline Web Fonts(http://www.onlinewebfonts.com)
+
+Dosis: https://fonts.google.com/specimen/Dosis?query=dosis
+
+
+Music:
+
+Game BGM: Music: Clowning Around by Shane Ivers - https://www.silvermansound.com
+
+Carnival ambient: https://freesound.org/people/alienistcog/sounds/126661/
+
+
+Sound Effects:
+https://freesound.org/people/WeeJee_vdH/sounds/267709/ (spray effect)
+https://freesound.org/people/belanhud/sounds/537897/ (balloon pop)
+https://freesound.org/people/Terhen/sounds/234220/ (balloon inflate)
+https://freesound.org/people/Bertrof/sounds/131657/ (npc leaving without balloon)
+https://freesound.org/people/InspectorJ/sounds/484344/ (npc asking for balloon)
+https://freesound.org/people/Raclure/sounds/483598/ (getting balloon color wrong for NPC)
+https://freesound.org/people/unadamlar/sounds/476178/ (getting balloon color correct for npc)

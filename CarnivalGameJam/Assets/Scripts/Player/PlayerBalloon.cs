@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerBalloon : MonoBehaviour
 {
@@ -88,6 +87,7 @@ public class PlayerBalloon : MonoBehaviour
         }
 
         SoundManager.Instance.Play("BalloonPop");
+        EventSystem.current.SetSelectedGameObject(null);
 
         ResetBalloon();
     }
@@ -111,6 +111,7 @@ public class PlayerBalloon : MonoBehaviour
             m_BlueSpray.Play();
 
         SoundManager.Instance.Play("SprayPaint");
+        EventSystem.current.SetSelectedGameObject(null);
 
         //if already true ignore
         if (m_CurrentMix.m_Blue)
@@ -126,6 +127,7 @@ public class PlayerBalloon : MonoBehaviour
             m_RedSpray.Play();
 
         SoundManager.Instance.Play("SprayPaint");
+        EventSystem.current.SetSelectedGameObject(null);
 
         //if already true ignore
         if (m_CurrentMix.m_Red)
@@ -141,6 +143,7 @@ public class PlayerBalloon : MonoBehaviour
             m_YellowSpray.Play();
 
         SoundManager.Instance.Play("SprayPaint");
+        EventSystem.current.SetSelectedGameObject(null);
 
         //if already true ignore
         if (m_CurrentMix.m_Yellow)

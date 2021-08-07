@@ -5573,7 +5573,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_NPCMinPatienceTime
-      value: 6.2
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}

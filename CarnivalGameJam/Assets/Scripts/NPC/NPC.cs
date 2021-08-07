@@ -21,6 +21,7 @@ public class NPC : MonoBehaviour
 
     [Header("Npc Effects")]
     public Animator m_Animator;
+    public Transform m_PropParentTransform;
 
     public float m_MaxShakeAmt = 1.0f;
     public float m_MaxShakeFrequency = 0.8f;
@@ -180,7 +181,16 @@ public class NPC : MonoBehaviour
 
         if (prop != null)
         {
-            //TODO:: attach prop to hand
+            //attach prop to hand
+            if (m_PropParentTransform != null)
+            {
+                if (m_PropParentTransform.childCount == 0)
+                {
+                    prop.transform.parent = m_PropParentTransform;
+                    prop.transform.localPosition = Vector3.zero;
+                    prop.transform.localRotation = Quaternion.identity;
+                }
+            }
         }
 
         if (m_BalloonObj != null)

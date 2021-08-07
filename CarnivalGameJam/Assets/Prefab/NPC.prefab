@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &592880771933059101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2606581141326609783}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2606581141326609783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592880771933059101}
+  m_LocalRotation: {x: -0.6640115, y: -0.000000119209275, z: 0.000000119209275, w: 0.74772245}
+  m_LocalPosition: {x: -0.0022, y: 0.0069, z: -0.012}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8060074240895990795}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -83.213005, y: 0, z: 0}
 --- !u!1 &7061663611908551811
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +515,7 @@ MonoBehaviour:
   m_ColorText: {fileID: 8060074239591094359}
   m_ColorDefaultImage: {fileID: 8060074239518672030}
   m_Animator: {fileID: 8060074240889017333}
+  m_PropParentTransform: {fileID: 2606581141326609783}
   m_MaxShakeAmt: 0.025
   m_MaxShakeFrequency: 0.9
   m_DefaultShakeFrequency: 0
@@ -687,6 +718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8060074240895990837}
+  - {fileID: 2606581141326609783}
   m_Father: {fileID: 8060074240895990793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

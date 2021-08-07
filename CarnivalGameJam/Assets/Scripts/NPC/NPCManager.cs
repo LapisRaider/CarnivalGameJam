@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCManager : MonoBehaviour
@@ -160,9 +159,16 @@ public class NPCManager : MonoBehaviour
             if (isWaiting)
                 m_NPCsWaitingRef[i] = npc;
 
-            //TODO:: properly set the props and material
-            //should have a randomize chance on whether to change or not for both
-            npc.StartNPCAppear(null, m_CustomerMaterial[Random.Range(0,8)]);
+            GameObject prop = null;
+            if (m_Props.Length != 0)
+            {
+                prop = m_Props[Random.Range(0, m_Props.Length)];
+                if (prop.activeInHierarchy)
+                    prop = null;
+            }
+
+            //properly set the props and material
+            npc.StartNPCAppear(prop, m_CustomerMaterial[Random.Range(0,8)]);
 
             return npc;
         }

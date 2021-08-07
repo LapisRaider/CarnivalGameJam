@@ -1,10 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSystems : MonoBehaviour
 {
+    [Header("Transitions")]
+    public Animator m_TransitionAnimation;
+    public float m_TransitionTime = 1.0f;
+
     [Header("UI")]
     public GameObject[] m_ObjectsToBeInactive;
     public GameObject m_PauseMenu;
@@ -41,11 +44,16 @@ public class GameSystems : MonoBehaviour
 
     public void TransitionScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (m_TransitionAnimation != null)
+            m_TransitionAnimation.SetTrigger("FadeOut");
+
+        StartCoroutine(TransitionNextScene(sceneName));
     }
 
-    public void SetPause(bool pause)
+    IEnumerator TransitionNextScene(string sceneName)
     {
-        m_Pause = pause;
+        yield return new WaitForSeconds(m_TransitionTime);
+
+        SceneManager.LoadScene(sceneName);
     }
 }

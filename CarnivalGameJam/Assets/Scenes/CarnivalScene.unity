@@ -5247,6 +5247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
+      propertyPath: m_MaxDifficultyInterval
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525367240256735677, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
+        type: 3}
       propertyPath: m_HappinessMeter.m_Needle
       value: 
       objectReference: {fileID: 1174520363}
@@ -5543,7 +5548,7 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_MaxSpawnRate
-      value: 1
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -5558,17 +5563,17 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_DefaultSpawnRate
-      value: 0.4
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_MinSpawnInterval
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_NPCMinPatienceTime
-      value: 5.5
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
@@ -5578,12 +5583,12 @@ PrefabInstance:
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_DefaultSpawnInterval
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}
       propertyPath: m_NPCManagerData.m_NPCDefaultPatienceTime
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6525367240334364456, guid: 7756cdefeb7e17d4fb3a98f381510f4c,
         type: 3}

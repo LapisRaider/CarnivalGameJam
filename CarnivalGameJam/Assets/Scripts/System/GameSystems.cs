@@ -18,6 +18,8 @@ public class GameSystems : MonoBehaviour
     {
         m_Pause = false;
         m_PauseMenu.SetActive(false);
+
+        SoundManager.Instance.Play("BGM");
     }
 
     public void Update()

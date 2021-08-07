@@ -60,6 +60,8 @@ public class PlayerBalloon : MonoBehaviour
         if (m_BalloonAnimator != null)
             m_BalloonAnimator.SetTrigger("BlowBalloon");
 
+        SoundManager.Instance.Play("BalloonInflate");
+        
         if (m_BalloonMaterial == null)
         {
             Debug.LogWarning("NO BALLOON OBJ REF");
@@ -85,6 +87,8 @@ public class PlayerBalloon : MonoBehaviour
             particleSettings.startColor = ColorData.Instance.GetColor(m_CurrentColor);
         }
 
+        SoundManager.Instance.Play("BalloonPop");
+
         ResetBalloon();
     }
 
@@ -106,6 +110,8 @@ public class PlayerBalloon : MonoBehaviour
         if (m_BlueSpray != null)
             m_BlueSpray.Play();
 
+        SoundManager.Instance.Play("SprayPaint");
+
         //if already true ignore
         if (m_CurrentMix.m_Blue)
             return;
@@ -119,6 +125,8 @@ public class PlayerBalloon : MonoBehaviour
         if (m_RedSpray != null)
             m_RedSpray.Play();
 
+        SoundManager.Instance.Play("SprayPaint");
+
         //if already true ignore
         if (m_CurrentMix.m_Red)
             return;
@@ -131,6 +139,8 @@ public class PlayerBalloon : MonoBehaviour
     {
         if (m_YellowSpray != null)
             m_YellowSpray.Play();
+
+        SoundManager.Instance.Play("SprayPaint");
 
         //if already true ignore
         if (m_CurrentMix.m_Yellow)

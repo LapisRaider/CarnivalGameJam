@@ -29,19 +29,24 @@ public class GameSystems : MonoBehaviour
             if (GameHandler.Instance.m_Lose)
                 return;
 
-            m_Pause = !m_Pause; //toggle pause
-            m_PauseMenu.SetActive(m_Pause);
-
-            for (int i =0; i < m_ObjectsToBeInactive.Length; ++i)
-            {
-                m_ObjectsToBeInactive[i].SetActive(!m_Pause);
-            }
-
-            if (m_Pause)
-                Time.timeScale = 0;
-            else
-                Time.timeScale = 1;
+            TogglePause();
         }
+    }
+
+    public void TogglePause()
+    {
+        m_Pause = !m_Pause; //toggle pause
+        m_PauseMenu.SetActive(m_Pause);
+
+        for (int i = 0; i < m_ObjectsToBeInactive.Length; ++i)
+        {
+            m_ObjectsToBeInactive[i].SetActive(!m_Pause);
+        }
+
+        if (m_Pause)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
     }
 
     public void TransitionScene(string sceneName)

@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
             if (Application.platform == RuntimePlatform.WebGLPlayer)
                 m_QuitButton.SetActive(false);
         }
+
+        SoundManager.Instance.Play("BackgroundNoise");
     }
 
     public void QuitGame()

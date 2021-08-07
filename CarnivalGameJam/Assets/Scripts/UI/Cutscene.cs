@@ -37,6 +37,8 @@ public class Cutscene : MonoBehaviour
         m_CurrTextPrinted = "";
         m_CurrentTimeTracker = 0.0f;
 
+        SoundManager.Instance.Play("BackgroundNoise");
+
         UpdateMaterials();
     }
 
@@ -79,6 +81,8 @@ public class Cutscene : MonoBehaviour
 
             if (m_Dialogue != null)
                 m_Dialogue.text = m_CurrTextPrinted;
+
+            SoundManager.Instance.Play("Text");
         }
     }
 

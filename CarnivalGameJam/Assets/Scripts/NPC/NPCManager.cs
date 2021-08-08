@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCManager : MonoBehaviour
+public class NPCManager : SingletonBase<NPCManager>
 {
     [Header("Object models")]
     public Texture[] m_CustomerMaterial;
@@ -197,6 +197,12 @@ public class NPCManager : MonoBehaviour
     private void UpdateNPCDataModifiers(float currModifier)
     {
         m_NPCManagerData.UpdateBasedOnModifier(currModifier);
+    }
+
+    public NPC GetNPCInQueue(int npcNumber)
+    {
+        NPC npc = m_CustomersInQueue[npcNumber];
+        return npc;
     }
 }
 

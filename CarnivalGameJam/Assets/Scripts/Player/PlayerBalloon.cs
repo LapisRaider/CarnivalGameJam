@@ -20,6 +20,9 @@ public class PlayerBalloon : MonoBehaviour
     private ColorVariants m_CurrentColor = ColorVariants.COLORLESS;
     private ColorMixes m_CurrentMix;
 
+    [Header("KeyBoardControls")]
+    public GameObject m_InstructionScreen;    
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,6 +32,18 @@ public class PlayerBalloon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (m_InstructionScreen != null) //toggle the instruction screen
+                m_InstructionScreen.SetActive(!m_InstructionScreen.activeSelf);
+        }
+
+        if (m_InstructionScreen != null)
+        {
+            if (m_InstructionScreen.activeSelf)
+                return;
+        }
+
         //check whether i clicked on an NPC
         if (Input.GetMouseButton(0))
         {
@@ -50,6 +65,48 @@ public class PlayerBalloon : MonoBehaviour
                 }
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            TapNPC(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            TapNPC(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            TapNPC(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            TapNPC(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            AddRed();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            AddBlue();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            AddYellow();
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            PopBalloon();
+        }
+    }
+
+    private void TapNPC(int queueNumber)
+    {
+        NPC npc = NPCManager.Instance.GetNPCInQueue(queueNumber);
+        if (npc == null)
+            return;
+
+        if (npc.TakeBalloon(m_CurrentColor)) //give balloon to child
+            ResetBalloon();
     }
 
     //reset the balloon and material
